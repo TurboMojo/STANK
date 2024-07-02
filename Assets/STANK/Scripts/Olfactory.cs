@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
-using Unity.VisualScripting.Antlr3.Runtime;
 
 public class Olfactory : MonoBehaviour
 {

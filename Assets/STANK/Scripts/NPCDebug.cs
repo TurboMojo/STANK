@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Animations;
+using UnityEngine.UI;
 
 public class NPCDebug : MonoBehaviour
 {
     Feller feller;
     Canvas debugCanvas;
-    TextMeshProUGUI detectedStankText;
-    TextMeshProUGUI detectedPungencyText;
+    Text detectedStankText;
+    Text detectedPungencyText;
 
     // Start is called before the first frame update
     void Start()
@@ -17,8 +17,8 @@ public class NPCDebug : MonoBehaviour
         debugCanvas = GetComponent<Canvas>();
         debugCanvas.worldCamera = Camera.main;
         feller = transform.parent.GetComponent<Feller>();
-        detectedPungencyText = debugCanvas.transform.Find("PungencyText").GetComponent<TextMeshProUGUI>();
-        detectedStankText = debugCanvas.transform.Find("StankText").GetComponent<TextMeshProUGUI>();
+        detectedPungencyText = debugCanvas.transform.Find("PungencyText").GetComponent<Text>();
+        detectedStankText = debugCanvas.transform.Find("StankText").GetComponent<Text>();
     }
 
     // Update is called once per frame
