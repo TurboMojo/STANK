@@ -1,4 +1,5 @@
-![Smell Tracking And Notification Kit](https://github.com/TurboMojo/STANK/assets/168988176/77a0838a-241c-45a1-b03a-245434a0f8e2)
+
+![GithubBanner](https://github.com/TurboMojo/STANK/assets/168988176/f4d93f31-98cf-4771-a0c3-fd3de649261b)
 
 **STANK**
 
