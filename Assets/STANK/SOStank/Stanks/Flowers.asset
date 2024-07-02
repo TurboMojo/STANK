@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34a28bc63ac426946a28ed95e9552459, type: 3}
+  m_Name: Flowers
+  m_EditorClassIdentifier: 
+  Name: Flower
+  ParticlesPerMillion: 1
+  Pungency: 0.046590388
+  GizmoColor: {r: 0.88494706, g: 1, b: 0, a: 0.39215687}
+  Description: 
+  Icon: {fileID: 2800000, guid: 095f911acc82a0444b6c96d2d914d075, type: 3}
+  HUDMaterial: {fileID: 2100000, guid: ee66aeec424437f40b79e43fbbe32ca1, type: 2}
+  response: {fileID: 11400000, guid: a31ba65df823bd24bb6d8d8b51949e62, type: 2}
+  HUDIcon: {fileID: 0}
+  Smeller: {fileID: 0}

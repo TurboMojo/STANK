@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/STANK/Editor/OdorHUDIcon.uss?fileID=7433441132597879392&amp;guid=f20ff5e22c1995143b85a7ae65d06331&amp;type=3#OdorHUDIcon" />
+    <ui:VisualElement name="HUDIcon" style="flex-grow: 1; width: 128px; height: 128px; background-color: rgb(0, 0, 0);" />
+</ui:UXML>
