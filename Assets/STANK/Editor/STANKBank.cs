@@ -25,11 +25,9 @@ public class STANKBank : EditorWindow
     VisualElement odorHudSpriteField;
     //UnityEngine.UIElements.Image odorHudSpriteField;
     ObjectField spriteImage;
-    TextField odorDescriptionField;
-    FloatField partsPerMillionField;
+    TextField odorDescriptionField;    
     Label odorNameLabel;
     Label odorDescriptionLabel;
-    Label ppmppLabel;
     Label hudIconLabel;
     Label gizmoColorLabel;
     VisualTreeAsset odorDetailsAsset;
@@ -41,8 +39,7 @@ public class STANKBank : EditorWindow
     SerializedProperty spriteProperty;
     SerializedObject serializedSelectedOdor;
     SerializedProperty nameProperty;
-    SerializedProperty descriptionProperty;
-    SerializedProperty ppmProperty;
+    SerializedProperty descriptionProperty;    
     SerializedProperty gizmoColorProperty;
     Stank selectedOdor;
     TwoPaneSplitView splitView;
@@ -68,11 +65,10 @@ public class STANKBank : EditorWindow
         gizmoColorLabel = new Label();
         spriteImage.objectType = typeof(Texture2D);
         odorDescriptionField = new TextField();
-        partsPerMillionField = new FloatField();
+        
         odorNameLabel = new Label();
         selectImageButton = new Button();
-        odorDescriptionLabel = new Label();
-        ppmppLabel = new Label();
+        odorDescriptionLabel = new Label();        
         hudIconLabel = new Label();
         spriteProperty = null;
         odorDetailPane = new VisualElement();
@@ -157,8 +153,6 @@ public class STANKBank : EditorWindow
         odorDetailPane.Add(odorNameField);
         odorDescriptionField.label = "STANK Description";
         odorDetailPane.Add(odorDescriptionField);
-        partsPerMillionField.label = "Particles Per Million";
-        odorDetailPane.Add(partsPerMillionField);
         gizmoColorField.label = "Gizmo Color";
         odorDetailPane.Add(gizmoColorField);
         odorHudSpriteField = odorDetailPane.Q<VisualElement>("HUDIcon");
@@ -215,7 +209,7 @@ public class STANKBank : EditorWindow
         spriteProperty = serializedSelectedOdor.FindProperty("Icon");
         nameProperty = serializedSelectedOdor.FindProperty("Name");
         descriptionProperty = serializedSelectedOdor.FindProperty("Description");
-        ppmProperty = serializedSelectedOdor.FindProperty("ParticlesPerMillion");
+        
         gizmoColorProperty = serializedSelectedOdor.FindProperty("GizmoColor");
         spriteImage.BindProperty(spriteProperty);
         UpdateHUDImagePreview();
