@@ -43,7 +43,7 @@ namespace STANK {
         VisualTreeAsset odorDetailsAsset;
         CreateOdorWindow wnd;
 
-        [MenuItem("STANK/Create Odor")]
+        [MenuItem("Tools/STANK/Create Odor")]
         public static void ShowWindow()
         {
             CreateOdorWindow wnd = GetWindow<CreateOdorWindow>();

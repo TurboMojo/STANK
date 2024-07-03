@@ -88,7 +88,7 @@ namespace STANK {
             splitView.Add(splitListView);
         }
 
-        [MenuItem("STANK/STANKBank")]
+        [MenuItem("Tools/STANK/STANKBank")]
         public static void ShowWindow()
         {
             STANKBank wnd = GetWindow<STANKBank>();
