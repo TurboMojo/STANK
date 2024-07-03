@@ -2,17 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class STANKBlocker : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
+namespace STANK {
+    public class STANKBlocker : MonoBehaviour
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

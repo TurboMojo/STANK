@@ -2,28 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class STANKResponseVFX : MonoBehaviour
-{
-    ParticleSystem ps;
-    public Stank stank;
-    float reactionTimer = 0f;
-    
-    // Start is called before the first frame update
-    void Start()
+namespace STANK {
+    public class STANKResponseVFX : MonoBehaviour
     {
-        ps = GetComponent<ParticleSystem>();
-    }
-
-    void Update(){
-        if(reactionTimer > 0) reactionTimer -= Time.deltaTime;
-    }
-
-    public void ProcessThreshold(STANKResponse response){
+        ParticleSystem ps;
+        public Stank stank;
+        float reactionTimer = 0f;
         
-        if(response.stank.name == stank.name && reactionTimer <= 0){
-            ps.Play();
-            reactionTimer = response.reactionDelay;
+        // Start is called before the first frame update
+        void Start()
+        {
+            ps = GetComponent<ParticleSystem>();
+        }
+
+        void Update(){
+            if(reactionTimer > 0) reactionTimer -= Time.deltaTime;
+        }
+
+        public void ProcessThreshold(STANKResponse response){
+            
+            if(response.stank.name == stank.name && reactionTimer <= 0){
+                ps.Play();
+                reactionTimer = response.reactionDelay;
+            }
         }
     }
 }

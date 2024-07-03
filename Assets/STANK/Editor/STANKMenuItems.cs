@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Farts : MonoBehaviour
+public class STANKMenuItems : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
