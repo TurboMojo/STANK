@@ -87,4 +87,4 @@ Create and configure at least one STANKResponse.
 
 **CUSTOM EXTENSIONS**
 
-You can write any script that can respond to a STANKResponse by deriving it from STANKResponseListener and ISTANKResponse.  This will include your script in the Event System driving STANKResponses.  The ISTANKResponse Interface will give you the ProcessThreshold(STANKResponse response) method, which will be called any time a STANKResponse is triggered.
+Custom classes should inherit STANKResponseListener and implement the ISTANKResponse interface.  This will include your script in the Event System driving STANKResponses.  The ISTANKResponse Interface will give you the ProcessThreshold(STANKResponse response) method, which will be called any time a STANKResponse is triggered.
