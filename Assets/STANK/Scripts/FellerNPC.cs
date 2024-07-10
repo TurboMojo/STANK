@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-
 namespace STANK {
     public class FellerNPC : MonoBehaviour
     {
