@@ -16,16 +16,16 @@ namespace STANK {
 
         [Header("Required Fields")]
         // Name of the Stank.  Can be used to display information to the player
-        public string Name;
+        public string Name = "";
         // ScriptableObject that contains the information to drive a Feller's response to this Stank
         public STANKResponse response;
         // Pungency is the ratio between a Feller's tolerance for this Stank and the CurrentStankLevel.  1.0 is calculated as the largest defined tolerance threshold for the Feller.
-        [HideInInspector] public float Pungency;
+        [HideInInspector] public float Pungency = 0f;
         public Color GizmoColor = Color.green;
 
         [Header("Optional Fields")]
         // Descriptive name of the Stank.    
-        public string Description;
+        public string Description = "";
         // Icon to display in HUD
         public Texture2D Icon;
         public Material HUDMaterial;

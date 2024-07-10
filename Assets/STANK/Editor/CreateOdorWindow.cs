@@ -47,7 +47,7 @@ namespace STANK {
         public static void ShowWindow()
         {
             CreateOdorWindow wnd = GetWindow<CreateOdorWindow>();
-            wnd.titleContent = new GUIContent("Create New Odor");
+            wnd.titleContent = new GUIContent("Create New STANK");
         }
         
         // Start is called before the first frame update
@@ -117,7 +117,7 @@ namespace STANK {
 
         private void CreateNewOdor()
         {        
-            newOdor = ScriptableObject.CreateInstance("Odor") as Stank; 
+            newOdor = ScriptableObject.CreateInstance("Stank") as Stank; 
             selectedOdor = new SerializedObject(newOdor);
             spriteProperty = selectedOdor.FindProperty("Icon");
             nameProperty = selectedOdor.FindProperty("Name");
