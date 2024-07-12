@@ -86,6 +86,7 @@ namespace STANK {
             splitListView.Add(addNewOdorButton);
             splitListView.Add(odorListPane);
             splitView.Add(splitListView);
+            splitView.Add(odorDetailPane);
         }
 
         [MenuItem("Tools/STANK/STANKBank")]
