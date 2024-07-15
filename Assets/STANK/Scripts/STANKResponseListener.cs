@@ -14,7 +14,6 @@ namespace STANK {
         public STANKResponseEvent responseEvent = new STANKResponseEvent();
 
         private void OnEnable(){
-            Debug.Log($"Registering listener {gameObject.name}");
             stankResponse.RegisterListener(this);
         }
 

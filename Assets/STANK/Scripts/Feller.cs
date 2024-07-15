@@ -133,7 +133,7 @@ namespace STANK {
                     detectedSTANKs.Remove(s.stank);
                     undetectedSmellers.Add(s);
                     // Set the reaction delay back to 0, in anticipation of a new response.
-                    reactionDelay = 0;
+                    delayTimer = 0;
                 }
             }
 
@@ -165,9 +165,11 @@ namespace STANK {
                 if (o.Pungency > o.response.pungencyThreshold && delayTimer <= 0)
                 {   
                     Debug.Log($"Triggering response: {o.response.name}");
-                    Debug.Log($"Response reaction delay: {o.response.reactionDelay}");
+                    Debug.Log($"Response reaction delay: {reactionDelay}");
+                    
                     o.response.Respond();
                     delayTimer = reactionDelay;
+                    Debug.Log($"delayTimer: {delayTimer}");
                 }
             }
         }
@@ -214,7 +216,7 @@ namespace STANK {
                     detectedSTANKs.Remove(stank);
 
                     // We also cancel our reaction delay timer
-                    delayTimer = 0f;
+                    //delayTimer = 0f;
                 }
             }
         }            

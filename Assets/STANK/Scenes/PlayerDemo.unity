@@ -26746,7 +26746,7 @@ MonoBehaviour:
   detectedSTANKs: []
   detectedSmellers: []
   undetectedSmellers: []
-  reactionDelay: 0
+  reactionDelay: 10
 --- !u!1 &8063213542104109212
 GameObject:
   m_ObjectHideFlags: 0
