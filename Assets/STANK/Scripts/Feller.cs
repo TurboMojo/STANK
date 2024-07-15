@@ -140,7 +140,16 @@ namespace STANK {
             // We populate our public list of detected STANKs for easy access by dependent scripts, such as STANKEye and STANKYLeg.
             foreach(Smeller smeller in detectedSmellers){
                 if(!detectedSTANKs.Contains(smeller.stank)){
-                    detectedSTANKs.Add(smeller.stank);
+                    Stank newStank = new Stank();
+                    newStank.name = smeller.stank.name;
+                    newStank.Pungency = smeller.stank.Pungency;
+                    newStank.response = smeller.stank.response;
+                    if(smeller.stank.Description != "") newStank.Description = smeller.stank.Description;
+                    if(smeller.stank.Icon != null) newStank.Icon = smeller.stank.Icon;
+                    if(smeller.stank.HUDMaterial != null) newStank.HUDMaterial = smeller.stank.HUDMaterial;
+                    if(smeller.stank.HUDIcon != null) newStank.HUDIcon = smeller.stank.HUDIcon;
+                    if(smeller.stank.Smeller != null) newStank.Smeller = smeller.stank.Smeller;
+                    detectedSTANKs.Add(newStank);
                 }
             }
 
