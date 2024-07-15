@@ -11,7 +11,9 @@ namespace STANK {
 
         Feller feller;    
         // sniffInterval is the number of seconds between each sniff
-        [SerializeField] float sniffInterval;
+        [SerializeField] float sniffInterval = 1.0f;
+        [Range(0,1)]
+        [SerializeField] float acuityMultiplier = 1.0f;
 
         // sniffTimer is the time remaining until the next sniff
         float sniffTimer = 0.0f;

@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4006747093431844604}
-  - component: {fileID: 1021831737689962808}
   - component: {fileID: 8839105235308457783}
+  - component: {fileID: 7889125221604794634}
   - component: {fileID: 2574639513863933162}
   m_Layer: 0
   m_Name: TearsNPC
@@ -34,21 +34,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -28.037, y: 0, z: 0}
---- !u!114 &1021831737689962808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7630640505922559541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2538320cc3d76041aeb79342f38c8d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stank: {fileID: 11400000, guid: 560b793315b7339428628b13ce3b6970, type: 2}
-  maxParticlesPerSecond: 0
-  startSize: 0
 --- !u!198 &8839105235308457783
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -66,7 +51,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -4772,6 +4757,22 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &7889125221604794634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7630640505922559541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3a34d72c776da4c9567d8aac3c45bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stankResponse: {fileID: 11400000, guid: 9f1fce76a8ca43b45a06cc70b3ed1bed, type: 2}
+  responseEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!199 &2574639513863933162
 ParticleSystemRenderer:
   serializedVersion: 6

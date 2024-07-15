@@ -42,6 +42,7 @@ namespace STANK {
         }
         
         public void ProcessThreshold(STANKResponse response){
+            /* Likely obsolete.  Need to double check
             foreach (AudioClip a in response.ResponseAudio){
                 var ps = Pool.Get();
                 if(mixer != null) {
@@ -50,7 +51,7 @@ namespace STANK {
                 ps.clip = a;
                 ps.transform.position = transform.position;
                 ps.PlayOneShot(a);
-            }
+            } */
         }
 
         // Collection checks will throw errors if we try to release an item that is already in the pool.

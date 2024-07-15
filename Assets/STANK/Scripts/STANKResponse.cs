@@ -34,6 +34,7 @@ namespace STANK {
         private readonly List<STANKResponseListener> listeners = new List<STANKResponseListener>();
 
         public void Respond(){
+            Debug.Log($"Respond to {stank.name} {listeners.Count} listeners");
             //if(reactionDelay > 0) return;
             for(int i = 0; i < listeners.Count; i++){
                 listeners[i].OnEventRaised(this);

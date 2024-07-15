@@ -34,7 +34,6 @@ namespace STANK {
 
         void BuildSTANKLayer()
         {   
-            Debug.Log("anim: " + anim.gameObject.name);
             // Create a layer in the AnimatorController for STANKResponses
             if (avatarMask != null) stankLayer = CreateSTANKLayer(anim, avatarMask);           
             else stankLayer = CreateSTANKLayer(anim);
@@ -156,11 +155,9 @@ namespace STANK {
         // Method to add a state to an existing AnimatorController layer with Trigger transitions
         public void AddStateToLayer(AnimatorControllerLayer layer, STANKResponse response)
         {
-            Debug.Log(response.name);
             // Add a state for this response animation to STANKLayer
             if(response.AnimationClip == null || anim == null) return;        
                 
-            Debug.Log("anim: " + anim.gameObject.name);
             AnimatorController ac = (AnimatorController) anim.runtimeAnimatorController;
             
             // Create a state and entry transition in the layer

@@ -10,11 +10,6 @@ namespace STANK {
 
         // STANKEye is the class that manages all visual effects related to STANKs.    
         float smellDetectionTickRate = 1.0f;
-        
-        // Parent gameobject positioned in front of the camera so that it's properly visible.
-        [SerializeField] GameObject fullscreenParticleParent;
-        // Parent gameobject for positioning particles that will interact with the world, such as vomit or sneeze particles.
-        [SerializeField] GameObject worldspaceParticleParent;
         STANKEyecon[] sTANKEyecons;
         List<GameObject> sTANKEyeAlphaGOs;
 

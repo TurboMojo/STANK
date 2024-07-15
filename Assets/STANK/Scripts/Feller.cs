@@ -132,7 +132,7 @@ namespace STANK {
                     detectedSmellers.Remove(s);
                     detectedSTANKs.Remove(s.stank);
                     undetectedSmellers.Add(s);
-                    // Set the reaction delay back to 0, in anticipation of a new.
+                    // Set the reaction delay back to 0, in anticipation of a new response.
                     reactionDelay = 0;
                 }
             }
@@ -153,7 +153,7 @@ namespace STANK {
             // Check this Feller's perception of all detected STANKs.  If the pungency of any is above the tolerance threshold, we trigger a STANKResponse and broadcast it to all components on this gameObject and all its children.
             foreach(Stank o in detectedSTANKs)
             {
-                if (o.Pungency > o.response.pungencyThreshold /* && delayTimer <= 0 */)
+                if (o.Pungency > o.response.pungencyThreshold && delayTimer <= 0)
                 {   
                     Debug.Log($"Triggering response: {o.response.name}");
                     Debug.Log($"Response reaction delay: {o.response.reactionDelay}");
@@ -198,11 +198,15 @@ namespace STANK {
                     stank.Pungency = GetHighestToleranceValue(stank);
                 }
                 
-                // If the Stank's pungency is below 0, we remove it from our list, as it is no longer detected.
-                if(stank.Pungency <= 0 ) detectedSTANKs.Remove(stank);
+                
+                if(stank.Pungency <= 0 ) 
+                {
+                    // If the Stank's pungency is below 0, we remove it from our list, as it is no longer detected.
+                    detectedSTANKs.Remove(stank);
 
-                // We also cancel our reaction delay timer
-                delayTimer = 0f;
+                    // We also cancel our reaction delay timer
+                    delayTimer = 0f;
+                }
             }
         }            
     } 

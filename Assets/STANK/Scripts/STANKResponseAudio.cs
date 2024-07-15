@@ -11,7 +11,6 @@ namespace STANK {
         
         void Start(){
             aSource = GetComponent<AudioSource>();
-            if(aSource == null) GameObject.Destroy(this);
             responseEvent.AddListener(ProcessThreshold);
         }
 

@@ -8,28 +8,24 @@ namespace STANK {
     {
         // Character controller for prototyping and demonstrating STANK.
         public float moveSpeed;
-        public float rotateSpeed;
+        public float horizontalRotateSpeed = 10f;
+        public float verticalRotateSpeed = 7f;
         public float burstSpeed;
-        
-        private bool m_Charging;
-        private Vector2 m_Rotation;
+        public GameObject eyeballs;
+    
+        private Vector2 bodyRotation = new Vector2(0,0);
+        private Vector2 headRotation = new Vector2(0,0);
         private Vector2 m_Look;
         private Vector2 m_Move;
 
-        public void OnMove(InputAction.CallbackContext context)
+        public void OnMove(InputValue value)
         {
-            m_Move = context.ReadValue<Vector2>();
+            m_Move = value.Get<Vector2>();
         }
 
-        public void OnLook(InputAction.CallbackContext context)
+        public void OnLook(InputValue value)
         {
-            m_Look = context.ReadValue<Vector2>();
-        }
-
-        public void OnGUI()
-        {
-            if (m_Charging)
-                GUI.Label(new Rect(100, 100, 200, 100), "Charging...");
+            m_Look = value.Get<Vector2>();
         }
 
         public void Update()
@@ -55,10 +51,14 @@ namespace STANK {
         {
             if (rotate.sqrMagnitude < 0.01)
                 return;
-            var scaledRotateSpeed = rotateSpeed * Time.deltaTime;
-            m_Rotation.y += rotate.x * scaledRotateSpeed;
-            m_Rotation.x = Mathf.Clamp(m_Rotation.x - rotate.y * scaledRotateSpeed, -89, 89);
-            transform.localEulerAngles = m_Rotation;
+            var scaledHorizontalRotateSpeed = horizontalRotateSpeed * Time.deltaTime;
+            bodyRotation.y += rotate.x * scaledHorizontalRotateSpeed;            
+            transform.localEulerAngles = bodyRotation;
+
+            var scaledVerticalRotateSpeed = verticalRotateSpeed * Time.deltaTime;
+            
+            headRotation.x = Mathf.Clamp(headRotation.x - rotate.y * scaledVerticalRotateSpeed, -89, 89);
+            eyeballs.transform.localEulerAngles = headRotation;
         }
     }
 }
