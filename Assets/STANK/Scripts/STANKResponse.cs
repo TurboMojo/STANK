@@ -21,7 +21,9 @@ namespace STANK {
         // STANKTolerance object that defines the threshold for this response.
         public float pungencyThreshold = 0.5f;
         [Tooltip("Minimum amount of time required between responses, prevents infinite puke loops")]
-        public float reactionDelay = 10.0f;
+        [Min(0.1f)]
+        public float responseDelay = 10.0f;      
+        public float delayTimer = 0.0f;
         
         [Header("Optional Fields")]
         // AnimationClip will be triggered when toleranceThreshold is reached.  This does not need to be added to your AnimatorController.  STANKYLeg will do it for you.
@@ -52,8 +54,8 @@ namespace STANK {
         }
 
         void Update(){
-            if(reactionDelay > 0) reactionDelay -= Time.deltaTime;
-            if(reactionDelay < 0) reactionDelay = 0;
+            if(responseDelay > 0) responseDelay -= Time.deltaTime;
+            if(responseDelay < 0) responseDelay = 0;
         }
     }
 }

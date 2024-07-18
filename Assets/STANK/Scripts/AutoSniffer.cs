@@ -37,7 +37,6 @@ namespace STANK {
             sniffTimer -= Time.deltaTime;
             if(sniffTimer <= 0.0f){
                 feller.TakeAWhiff();
-                Debug.Log("Autosniff");
                 sniffTimer = sniffInterval;
             }
         }

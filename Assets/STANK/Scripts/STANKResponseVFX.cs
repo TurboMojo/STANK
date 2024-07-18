@@ -23,7 +23,7 @@ namespace STANK {
             
             if(response.stank.name == stank.name && reactionTimer <= 0){
                 ps.Play();
-                reactionTimer = response.reactionDelay;
+                reactionTimer = response.responseDelay;
             }
         }
     }

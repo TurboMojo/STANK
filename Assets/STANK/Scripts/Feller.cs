@@ -27,9 +27,9 @@ namespace STANK {
         public List<STANKResponse> responses;
         [Tooltip("How well this feller smells")]
         public float acuity = 1.0f;
-        [Tooltip("Delay in seconds between reactions.  This MUST be > 0, or no reactions will ever successfully occur.")]
+        /* [Tooltip("Delay in seconds between reactions.  This MUST be > 0, or no reactions will ever successfully occur.")]
         public float reactionDelay = 10.0f;
-
+        float delayTimer = 0.0f; */
         [Header("Optional Fields")]
         // STANKEye and STANKYLeg are optional, but if they are not present, the Feller will not react to smells unless supported by custom components.  Must be attached to the Feller gameobject.
         STANKEye stankeye;
@@ -49,7 +49,7 @@ namespace STANK {
         [HideInInspector] public List<Smeller> undetectedSmellers;    
         
 
-        float delayTimer = 0.0f;
+        
         float blockerPermeability = 0.0f;
 
         public void Initialize(){
@@ -69,8 +69,6 @@ namespace STANK {
             CalculatePungency();
             // Check our currently smelled Stanks and see if we smell any of them enough to trigger a STANKResponse.
             CheckPerception();
-            
-            if(delayTimer > 0) delayTimer -= Time.deltaTime;
         }
 
         public float GetHighestToleranceValue(Stank odor)
@@ -164,14 +162,10 @@ namespace STANK {
             // Check this Feller's perception of all detected STANKs.  If the pungency of any is above the tolerance threshold, we trigger a STANKResponse and broadcast it to all components on this gameObject and all its children.
             foreach(Stank o in detectedSTANKs)
             {
-                if (o.Pungency > o.response.pungencyThreshold && delayTimer <= 0)
-                {   
-                    Debug.Log($"Triggering response: {o.response.name}");
-                    Debug.Log($"Response reaction delay: {reactionDelay}");
-                    
+                if (o.Pungency > o.response.pungencyThreshold && o.response.delayTimer <= 0)
+                {                       
                     o.response.Respond();
-                    delayTimer = reactionDelay;
-                    Debug.Log($"delayTimer: {delayTimer}");
+                    o.response.delayTimer = o.response.responseDelay;                    
                 }
             }
         }
