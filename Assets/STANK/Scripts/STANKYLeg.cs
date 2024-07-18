@@ -7,7 +7,7 @@ using UnityEngine.Assertions.Must;
 
 
 namespace STANK {
-    public class STANKYLeg : MonoBehaviour
+    public class STANKYLeg : STANKResponseListener, ISTANKResponse
     {
         // STANKYLeg is the class that manages animations triggered by STANKResponses.
         // An AnimatorControllerLayer is built at runtime and added to the AnimatorController.
@@ -29,6 +29,9 @@ namespace STANK {
             if(anim == null) anim = transform.parent.GetComponent<Animator>();
             sTANKEye = transform.parent.GetComponentInChildren<STANKEye>();
             feller = f;
+
+            // STANKYLeg should always be using the responses defined in the Feller, rather than responses defined in the stankResponse list from STANKResponseListener.
+            if(stankResponse.Count > 0) stankResponse = feller.responses;
             BuildSTANKLayer();
         }
 

@@ -27,6 +27,8 @@ namespace STANK {
         public List<STANKResponse> responses;
         [Tooltip("How well this feller smells")]
         public float acuity = 1.0f;
+        [Tooltip("Delay in seconds between reactions.  This MUST be > 0, or no reactions will ever successfully occur.")]
+        public float reactionDelay = 10.0f;
 
         [Header("Optional Fields")]
         // STANKEye and STANKYLeg are optional, but if they are not present, the Feller will not react to smells unless supported by custom components.  Must be attached to the Feller gameobject.
@@ -46,9 +48,9 @@ namespace STANK {
         // undetectedOdors is a list of all the Smellers that this Feller has not detected.    
         [HideInInspector] public List<Smeller> undetectedSmellers;    
         
-        [Tooltip("Delay in seconds between reactions.  This MUST be > 0, or no reactions will ever successfully occur.")]
-        public float reactionDelay = 10.0f;
+
         float delayTimer = 0.0f;
+        float blockerPermeability = 0.0f;
 
         public void Initialize(){
             stankeye = GetComponent<STANKEye>();     
@@ -121,7 +123,7 @@ namespace STANK {
                 if(Vector3.Distance(transform.position, s.transform.position) < s.radius ) {
                     if(Physics.Raycast(transform.position, s.transform.position - transform.position, out hit, s.radius)){
                         // Blocker in the way.  Stank occluded.
-                        if(hit.collider.GetComponent<STANKBlocker>() != null) continue;
+                        if(hit.collider.GetComponent<STANKluder>() != null) blockerPermeability = hit.collider.GetComponent<STANKluder>().permeability;
                     }
                     // No blocker in the way.  Feller smells this Smeller.
                     detectedSmellers.Add(s);
@@ -133,7 +135,7 @@ namespace STANK {
                     detectedSTANKs.Remove(s.stank);
                     undetectedSmellers.Add(s);
                     // Set the reaction delay back to 0, in anticipation of a new response.
-                    delayTimer = 0;
+                    //delayTimer = 0;
                 }
             }
 
@@ -200,8 +202,8 @@ namespace STANK {
                 {
                     //Debug.Log("Calculate pungency A: "+stank.Pungency);
                     // If the Stank's pungency is below the highest tolerance value, we apply the pungency dropoff.
-                    //stank.Pungency = acuity*(stank.Pungency * stank.Smeller.pungencyCurve.Evaluate(radiusPercentage));
-                    stank.Pungency = stank.Smeller.pungencyCurve.Evaluate(radiusPercentage);
+                    stank.Pungency = stank.Smeller.pungencyCurve.Evaluate(radiusPercentage) *acuity;
+                    //stank.Pungency = stank.Smeller.pungencyCurve.Evaluate(radiusPercentage);
                 }
                 else{
                     //Debug.Log("Calculate pungency B: "+stank.Pungency);

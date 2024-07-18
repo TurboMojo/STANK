@@ -18,10 +18,12 @@ namespace STANK {
 
 
         public void ProcessThreshold(STANKResponse response){
-            Debug.Log($"StankResponse: {stankResponse.stank.name} Response: {response.stank.name}");
-            if(stankResponse.name == response.name){
+            foreach(STANKResponse a in stankResponse){
+                if(a.name == response.name){
                 ps.Play(true);            
             }
+            }
+            
         }
     }
 }

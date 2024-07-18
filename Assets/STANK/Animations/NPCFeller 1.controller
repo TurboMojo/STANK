@@ -48,7 +48,7 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1107 &-1175789605392218490
+--- !u!1107 &-1135082905625553250
 AnimatorStateMachine:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -124,7 +124,7 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
     m_Name: StankyLeg
-    m_StateMachine: {fileID: -1175789605392218490}
+    m_StateMachine: {fileID: -1135082905625553250}
     m_Mask: {fileID: 0}
     m_Motions: []
     m_Behaviours: []

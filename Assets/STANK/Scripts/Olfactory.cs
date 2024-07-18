@@ -10,7 +10,6 @@ namespace STANK {
     {
         public static Olfactory Instance { get; private set; }
 
-
         public List<Feller> fellers;
         public List<Smeller> smellers;    
         public List<Stank> stanks;
@@ -55,7 +54,6 @@ namespace STANK {
             GameObject imgObject = new GameObject(odor.name+"_HUDIcon");
             imgObject.transform.SetParent(hudParent);
             RectTransform trans = imgObject.AddComponent<RectTransform>();
-            //trans.transform.SetParent(hudParent); // setting parent
             trans.localScale = Vector3.one;
             trans.anchoredPosition = Vector2.zero; // setting position, will be on center
             trans.sizeDelta = new Vector2(odor.Icon.width, odor.Icon.height); // custom size
@@ -69,35 +67,9 @@ namespace STANK {
             return image;
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-            
-        }
-
         public void AddFeller(Feller f)
         {
             fellers.Add(f);
-        }
-        public STANKResponse GetStankTolerance(Feller f, Stank odor, float stankLevel)
-        {        
-            STANKResponse defaultResponse = new STANKResponse();
-            List<STANKResponse> response = f.responses;
-            STANKResponse stankResponse = f.responses
-                .Where(st => st.stank.Name == odor.Name)
-                .OrderBy(st => Mathf.Abs(st.stank.Pungency - odor.Pungency))
-                .FirstOrDefault();
-
-
-
-            if (stankResponse.stank.Pungency < stankLevel)
-            {
-                return stankResponse;
-            }
-            else
-            {
-                return defaultResponse;
-            }
         }
     }
 }

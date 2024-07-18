@@ -22,7 +22,7 @@ namespace STANK {
         public AnimationCurve pungencyCurve;
         public Stank Stank { get => stank;}
         // The rate at which the Smeller's radius expands (meters per second)
-        [SerializeField] float expansionRate = 1.0f;
+        [SerializeField] float expansionRate = 0.0f;
 
         [Header("Optional Fields")]
         [HideInInspector] public Image hudImage;

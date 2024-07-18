@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 151893488366553745}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.403783, y: -3.369985, z: 27.797777}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -382,7 +383,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2281134276320921537
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10986,10 +10987,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 267e87b7022c59240b5bfae3b2f2f546, type: 2}
   - {fileID: 11400000, guid: a31ba65df823bd24bb6d8d8b51949e62, type: 2}
   acuity: 1
+  reactionDelay: 0
   detectedSTANKs: []
   detectedSmellers: []
   undetectedSmellers: []
-  reactionDelay: 0
 --- !u!114 &2606798565018304312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11002,6 +11003,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f18d3e6c4fc3a7e4b9d6c12583f6ad6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stankResponse: {fileID: 0}
+  responseEvent:
+    m_PersistentCalls:
+      m_Calls: []
   avatarMask: {fileID: 0}
 --- !u!114 &3481681164488609647
 MonoBehaviour:
@@ -11016,6 +11021,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sniffInterval: 0
+  acuityMultiplier: 1
 --- !u!114 &5424713471697830471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11028,8 +11034,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a703573b595d02545b1de22d75fc60cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fullscreenParticleParent: {fileID: 324344346606343020}
-  worldspaceParticleParent: {fileID: 0}
 --- !u!1 &8328331996506093700
 GameObject:
   m_ObjectHideFlags: 0
@@ -16607,32 +16611,8 @@ PrefabInstance:
     - {fileID: 5499550714022916470, guid: d1430d84ba3d1c04c82d46fc26e8a3fc, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5521053766137284742, guid: d1430d84ba3d1c04c82d46fc26e8a3fc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5977473717636818154}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1430d84ba3d1c04c82d46fc26e8a3fc, type: 3}
---- !u!1 &36998894307747326 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5521053766137284742, guid: d1430d84ba3d1c04c82d46fc26e8a3fc, type: 3}
-  m_PrefabInstance: {fileID: 5484763579015605624}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5977473717636818154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 36998894307747326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b3a34d72c776da4c9567d8aac3c45bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stankResponse: {fileID: 11400000, guid: 267e87b7022c59240b5bfae3b2f2f546, type: 2}
-  responseEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &3871391008018131249 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8765195604611974217, guid: d1430d84ba3d1c04c82d46fc26e8a3fc, type: 3}
@@ -16826,32 +16806,8 @@ PrefabInstance:
     - {fileID: 5499550714022916470, guid: d1430d84ba3d1c04c82d46fc26e8a3fc, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5521053766137284742, guid: d1430d84ba3d1c04c82d46fc26e8a3fc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 371094684606301601}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1430d84ba3d1c04c82d46fc26e8a3fc, type: 3}
---- !u!1 &1898723822050666628 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5521053766137284742, guid: d1430d84ba3d1c04c82d46fc26e8a3fc, type: 3}
-  m_PrefabInstance: {fileID: 6253008834128044034}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &371094684606301601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1898723822050666628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b3a34d72c776da4c9567d8aac3c45bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stankResponse: {fileID: 11400000, guid: 267e87b7022c59240b5bfae3b2f2f546, type: 2}
-  responseEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &3414604354796299339 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8765195604611974217, guid: d1430d84ba3d1c04c82d46fc26e8a3fc, type: 3}

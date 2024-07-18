@@ -9,16 +9,21 @@ namespace STANK {
 
     public class STANKResponseListener : MonoBehaviour
     {
-        public STANKResponse stankResponse;
+        public List<STANKResponse> stankResponse;
         [HideInInspector]
         public STANKResponseEvent responseEvent = new STANKResponseEvent();
 
         private void OnEnable(){
-            stankResponse.RegisterListener(this);
+            foreach(STANKResponse a in stankResponse){
+                a.RegisterListener(this);
+            }
+            
         }
 
         private void OnDisable(){
-            stankResponse.UnregisterListener(this);
+            foreach(STANKResponse a in stankResponse){
+                a.UnregisterListener(this);
+            }
         }
 
         public void OnEventRaised(STANKResponse response){

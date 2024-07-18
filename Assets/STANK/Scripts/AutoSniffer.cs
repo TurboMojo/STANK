@@ -16,6 +16,7 @@ namespace STANK {
         [SerializeField] float acuityMultiplier = 1.0f;
 
         // sniffTimer is the time remaining until the next sniff
+        [Range(0.25f, float.PositiveInfinity)]
         float sniffTimer = 0.0f;
 
         // Start is called before the first frame update
@@ -36,6 +37,7 @@ namespace STANK {
             sniffTimer -= Time.deltaTime;
             if(sniffTimer <= 0.0f){
                 feller.TakeAWhiff();
+                Debug.Log("Autosniff");
                 sniffTimer = sniffInterval;
             }
         }
