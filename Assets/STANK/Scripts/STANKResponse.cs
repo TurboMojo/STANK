@@ -35,27 +35,36 @@ namespace STANK {
 
         private readonly List<STANKResponseListener> listeners = new List<STANKResponseListener>();
 
+        void Awake(){
+            
+        }
+
         public void Respond(){
-            Debug.Log($"Respond to {stank.name} {listeners.Count} listeners");
-            //if(reactionDelay > 0) return;
+            delayTimer = responseDelay;
             for(int i = 0; i < listeners.Count; i++){
                 listeners[i].OnEventRaised(this);
             }
         }
 
+
         public void RegisterListener(STANKResponseListener listener){
+            delayTimer = 0;
             if(!listeners.Contains(listener)) {
+                //Debug.Log("Registering listener: "+listener.name);
                 listeners.Add(listener);
+            } else {
+                Debug.Log("Listener already registered");
             }
         }
 
         public void UnregisterListener(STANKResponseListener listener){
+            
             if(listeners.Contains(listener)) listeners.Remove(listener);
+            else Debug.Log("Listener already unregistered");            
         }
 
         void Update(){
-            if(responseDelay > 0) responseDelay -= Time.deltaTime;
-            if(responseDelay < 0) responseDelay = 0;
+            if(delayTimer > 0) delayTimer -= Time.deltaTime;
         }
     }
 }

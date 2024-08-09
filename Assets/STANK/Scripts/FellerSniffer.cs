@@ -20,10 +20,11 @@ namespace STANK {
             feller = GetComponent<Feller>();
             input = new STANKInput();
             input.gameplay.Enable();
-            input.gameplay.Sniff.performed += Sniff;
+            input.gameplay.Sniff.canceled += Sniff;
         }
 
         void Sniff(InputAction.CallbackContext context){
+            Debug.Log("Sniff");
             // Takes a whiff at the player's request
             feller.TakeAWhiff();
         }

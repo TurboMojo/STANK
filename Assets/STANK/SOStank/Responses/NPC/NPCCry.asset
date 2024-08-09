@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 891b1f39f5121a04b841126ff22ffc0e, type: 3}
-  m_Name: Puke
+  m_Name: NPCCry
   m_EditorClassIdentifier: 
-  stank: {fileID: 11400000, guid: 1bdf5509d9ab059439779395725e1bd0, type: 2}
+  stank: {fileID: 11400000, guid: 560b793315b7339428628b13ce3b6970, type: 2}
   pungencyThreshold: 0.5
-  reactionDelay: 10
-  AnimationClip: {fileID: 7400000, guid: f7980736162bd8a4699472beca25b812, type: 2}
+  responseDelay: 10
+  delayTimer: 0
+  AnimationClip: {fileID: 0}
   ResponseAudio: []
   RagdollRoot: {fileID: 0}

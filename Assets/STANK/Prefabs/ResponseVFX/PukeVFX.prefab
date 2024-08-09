@@ -4827,7 +4827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3a34d72c776da4c9567d8aac3c45bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stankResponse: {fileID: 11400000, guid: 0f6c4cecc0275cf40b962ee59c35cfae, type: 2}
+  stankResponse: []
   responseEvent:
     m_PersistentCalls:
       m_Calls: []

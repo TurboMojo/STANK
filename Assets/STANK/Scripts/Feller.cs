@@ -46,11 +46,10 @@ namespace STANK {
         [HideInInspector] public List<Smeller> detectedSmellers;
         
         // undetectedOdors is a list of all the Smellers that this Feller has not detected.    
-        [HideInInspector] public List<Smeller> undetectedSmellers;    
-        
+        [HideInInspector] public List<Smeller> undetectedSmellers; 
+        float blockerPermeability = 0.0f;
 
         
-        float blockerPermeability = 0.0f;
 
         public void Initialize(){
             stankeye = GetComponent<STANKEye>();     
@@ -140,16 +139,24 @@ namespace STANK {
             // We populate our public list of detected STANKs for easy access by dependent scripts, such as STANKEye and STANKYLeg.
             foreach(Smeller smeller in detectedSmellers){
                 if(!detectedSTANKs.Contains(smeller.stank)){
-                    Stank newStank = new Stank();
+                    Stank newStank = ScriptableObject.CreateInstance<Stank>();
                     newStank.name = smeller.stank.name;
                     newStank.Pungency = smeller.stank.Pungency;
-                    newStank.response = smeller.stank.response;
+                    
                     if(smeller.stank.Description != "") newStank.Description = smeller.stank.Description;
                     if(smeller.stank.Icon != null) newStank.Icon = smeller.stank.Icon;
                     if(smeller.stank.HUDMaterial != null) newStank.HUDMaterial = smeller.stank.HUDMaterial;
                     if(smeller.stank.HUDIcon != null) newStank.HUDIcon = smeller.stank.HUDIcon;
                     if(smeller.stank.Smeller != null) newStank.Smeller = smeller.stank.Smeller;
+                    
                     detectedSTANKs.Add(newStank);
+                    //Debug.Log("Detected STANK: " + newStank.name);
+                } else {
+                    foreach(Stank stank in detectedSTANKs){
+                        if(stank.name == smeller.stank.name){
+                            stank.Pungency = smeller.stank.Pungency;
+                        }
+                    }
                 }
             }
 
@@ -157,16 +164,30 @@ namespace STANK {
             if(stankeye) stankeye.RefreshHUD();
         }
 
+        void UpdateComponentReferences(){
+
+        }
+
         void CheckPerception()
-        {
+        {            
             // Check this Feller's perception of all detected STANKs.  If the pungency of any is above the tolerance threshold, we trigger a STANKResponse and broadcast it to all components on this gameObject and all its children.
             foreach(Stank o in detectedSTANKs)
             {
-                if (o.Pungency > o.response.pungencyThreshold && o.response.delayTimer <= 0)
-                {                       
-                    o.response.Respond();
-                    o.response.delayTimer = o.response.responseDelay;                    
+                
+                foreach(STANKResponse response in responses){
+                    if(o.name == response.stank.name){                        
+                        
+                        /* Debug.Log(o.name+ "pungency: "+o.Pungency);
+                        Debug.Log("Threshold: "+perceivedResponse.pungencyThreshold);
+                        Debug.Log("Delay timer: "+perceivedResponse.delayTimer); */
+                        if (o.Pungency > response.pungencyThreshold && response.delayTimer <= 0)
+                        {                  
+                            Debug.Log("Response triggered: "+ response.name);     
+                            response.Respond();
+                        }
+                    }
                 }
+                
             }
         }
 

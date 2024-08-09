@@ -6,8 +6,7 @@ namespace STANK {
     [RequireComponent(typeof(ParticleSystem))]
     public class STANKResponseParticles : STANKResponseListener, ISTANKResponse
     {
-        ParticleSystem ps;
-        
+        ParticleSystem ps;        
         
         // Start is called before the first frame update
         void Start()
@@ -18,12 +17,14 @@ namespace STANK {
 
 
         public void ProcessThreshold(STANKResponse response){
+              
             foreach(STANKResponse a in stankResponse){
                 if(a.name == response.name){
-                ps.Play(true);            
-            }
-            }
-            
+                    //Debug.Log("Playing Response: "+response.name+" on "+gameObject.name);
+                    //Debug.Log("a.name: "+a.name);
+                    ps.Play(true);            
+                }
+            }            
         }
     }
 }
