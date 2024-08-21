@@ -19,6 +19,8 @@ namespace STANK {
 
         [Tooltip("Optional avatar mask to define which bones will respond to response animations")]
         [SerializeField] AvatarMask avatarMask;
+        [Tooltip("Optional Rigidbody to ragdoll when response animations are triggered if reaction triggers fainting.")]
+        [SerializeField] Rigidbody ragdollRoot;
         //float currentreactionDelayTimer;
         float layerTimer = 0f;
         int layerIndex = 0;
@@ -207,7 +209,7 @@ namespace STANK {
             if(response.AnimationClip == null) return;
             
             // If a RagdollRoot is defined, faint the Feller and return.
-            if(response.RagdollRoot != null){
+            if(ragdollRoot != null){
                 Faint(response);
                 return;
             }
@@ -221,7 +223,7 @@ namespace STANK {
 
         void Faint(STANKResponse response){
             // We ragdoll the RagdollRoot and all its Rigidbody children
-            foreach(Rigidbody r in response.RagdollRoot.gameObject.GetComponentsInChildren<Rigidbody>()){
+            foreach(Rigidbody r in ragdollRoot.gameObject.GetComponentsInChildren<Rigidbody>()){
                 r.isKinematic = false;
             }
         }

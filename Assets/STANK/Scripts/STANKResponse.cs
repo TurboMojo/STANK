@@ -28,10 +28,9 @@ namespace STANK {
         [Header("Optional Fields")]
         // AnimationClip will be triggered when toleranceThreshold is reached.  This does not need to be added to your AnimatorController.  STANKYLeg will do it for you.
         public AnimationClip AnimationClip;    
-        // ResponseAudio should contain all the AudioClips that should be played when the STANKTolerance is reached.
-        public AudioClip[] ResponseAudio;
+
         // Ragdoll support is intended for actions such as fainting or death.  If this is set, isKinematic on all Rigidbodies in the RagdollRoot will be disabled.
-        public Rigidbody RagdollRoot;
+        //public Rigidbody RagdollRoot;
 
         private readonly List<STANKResponseListener> listeners = new List<STANKResponseListener>();
 

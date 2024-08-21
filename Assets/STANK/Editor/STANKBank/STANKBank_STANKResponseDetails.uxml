@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:VisualElement name="STANKReactionDetails" style="flex-grow: 1;">
+        <uie:ObjectField label="Icon" name="STANKField" allow-scene-objects="false" style="align-items: flex-start;" />
+        <ui:FloatField label="Float Field" value="42.2" name="PungencyThresholdField" />
+        <ui:FloatField label="Float Field" value="42.2" name="ResponseDelayField" />
+        <uie:ObjectField label="Object Field" name="AnimationClipField" />
+        <ui:Button text="DELETE" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DeleteSTANKReactionButton" style="background-color: rgb(255, 0, 0); -unity-font-style: bold; font-size: 24px; width: 146px; align-items: flex-end; align-self: flex-end;" />
+    </ui:VisualElement>
+</ui:UXML>

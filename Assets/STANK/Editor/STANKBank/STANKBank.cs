@@ -19,6 +19,8 @@ namespace STANK {
 
         // Elements of the UIDocument
         VisualElement rootAsset;
+        Texture2D defaultImageGridTexture;
+        
         VisualTreeAsset odorListItem;
         VisualElement odorListPanel;
         StyleSheet odorWidgetSS;
@@ -37,7 +39,7 @@ namespace STANK {
         ListView odorListPane;
         ColorField gizmoColorField;
         StyleSheet odorDetailsSS;
-        Texture2D defaultImageGridTexture;
+        VisualTreeAsset stankBankAsset;  
         Button selectImageButton;
         SerializedProperty spriteProperty;
         SerializedObject serializedSelectedOdor;
@@ -53,8 +55,9 @@ namespace STANK {
 
         private void OnEnable()
         {
-            if (Vault == null) Vault = this;
+            if (Vault == null) Vault = this; else GameObject.Destroy(this);
             rootAsset = rootVisualElement;
+            stankBankAsset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/STANK/Editor/STANKBank/ImprovedSTANKBank.uxml");
             defaultImageGridTexture = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/STANK/Editor/Textures/defaultimagegrid.png");
             odorDetailsSS = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/STANK/Editor/OdorHUDIcon.uss");
             odorDetailsAsset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/STANK/Editor/OdorHUDIcon.uxml");
@@ -222,4 +225,5 @@ namespace STANK {
             gizmoColorField.BindProperty(gizmoColorProperty);
         }
     }
+    
 }

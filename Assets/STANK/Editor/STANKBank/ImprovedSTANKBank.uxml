@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <uie:Toolbar>
+        <uie:ToolbarButton text="STANKs" parse-escape-sequences="true" display-tooltip-when-elided="true" name="STANKsToolbarButton" />
+        <uie:ToolbarButton text="STANKReactions" parse-escape-sequences="true" display-tooltip-when-elided="true" name="STANKReactionsToolbarButton" />
+        <uie:ToolbarButton text="Smellers" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SmellersToolbarButton" />
+        <uie:ToolbarButton text="Fellers" parse-escape-sequences="true" display-tooltip-when-elided="true" name="FellersToolbarButton" />
+    </uie:Toolbar>
+    <ui:VisualElement name="STANKBankTeller" style="flex-grow: 1; align-items: flex-start; flex-direction: row;" />
+</ui:UXML>
