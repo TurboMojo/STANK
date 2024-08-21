@@ -69,7 +69,7 @@ namespace STANK {
         SerializedProperty pungencyThresholdProperty;
         SerializedProperty responseDelayProperty;
         SerializedProperty AnimationClipProperty;
-
+        
 
         private void OnEnable(){
             if (Vault == null) Vault = this; else GameObject.Destroy(this);
@@ -80,6 +80,7 @@ namespace STANK {
             BuildBANKWindow();
             BuildToolBar();
             BuildSTANKSTab();
+            BuildSTANKResponsesTab();
 
             //if(deleteSTANKButton == null) Debug.Log("deleteSTANKButton not found");
             //deleteSTANKButton.clicked += DeleteSTANK;
@@ -94,7 +95,7 @@ namespace STANK {
             fellersButton = rootAsset.Q<ToolbarButton>("FellersToolbarButton");            
 
             stanksButton.clicked += ShowSTANKSTab;
-            stankResponsesButton.clicked += ShowSTANKReactionsTab;
+            stankResponsesButton.clicked += ShowSTANKResponsesTab;
             smellersButton.clicked += ShowSmellersTab;
             fellersButton.clicked += ShowFellersTab;
         }
@@ -127,22 +128,28 @@ namespace STANK {
             stankListView = stankBankWindow_STANKS.Q<ListView>("STANKSListView");
             //if(stankListView == null) Debug.Log("stanksListView not found");            
             
-            stankDetailsAsset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/STANK/Editor/STANKBank/STANKBank_STANKDetails.uxml");
-            stankListItem = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/STANK/Editor/STANKBank/STANKListItem.uxml");
-            stankDetailsModule = stankDetailsAsset.CloneTree();
+            //stankDetailsAsset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/STANK/Editor/STANKBank/STANKBank_STANKDetails.uxml");
+            //if(stankDetailsAsset == null) Debug.Log("stankDetailsAsset not found");
+            //stankListItem = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/STANK/Editor/STANKBank/STANKListItem.uxml");
+            //stankDetailsModule = stankDetailsAsset.CloneTree();
+            //if(stankDetailsModule == null) Debug.Log("stankDetailsModule not found");
+            if(stankBankWindow_STANKS == null) Debug.Log("stankBankWindow_STANKS not found");
+            stankDetailsModule = stankBankWindow_STANKS.Q<VisualElement>("STANKsDetailsWindow");
             if(stankDetailsModule == null) Debug.Log("stankDetailsModule not found");
             iconField = stankDetailsModule.Q<ObjectField>("IconField");
             if(iconField == null) Debug.Log("IconField not found");
             stankHudSpriteField = stankDetailsModule.Q<ObjectField>("IconField");
             deleteSTANKButton = stankDetailsModule.Q<Button>("DeleteSTANKButton");
-            stankBankTeller.Add(stankDetailsModule);
+            //VisualElement stanksDetailsPanel = stankDetailsModule.Q<VisualElement>("STANKDetailsPanel");
+            //if(stanksDetailsPanel == null) Debug.Log("stanksDetailsPanel not found");
+            //stanksDetailsPanel.Add(stankDetailsModule);
             stankNameField = stankDetailsModule.Q<TextField>("NameField");
             stankDescriptionField = stankDetailsModule.Q<TextField>("DescriptionField");
             gizmoColorField = stankDetailsModule.Q<ColorField>("GizmoColorField");
             hudMaterialField = stankDetailsModule.Q<ObjectField>("HUDMaterialField");
         }
 
-        void BuildReactionsTab(){
+        void BuildSTANKResponsesTab(){
             stankResponseDetailsAsset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/STANK/Editor/STANKBank/STANKBank_STANKResponseDetails.uxml");
         }
 
@@ -155,9 +162,17 @@ namespace STANK {
         }
 
         void ShowSTANKSTab(){
+            stankBankWindow_STANKS.style.display = DisplayStyle.Flex;
+            stankBankWindow_STANKResponses.style.display = DisplayStyle.None;
+            stankBankWindow_Fellers.style.display = DisplayStyle.None;
+            stankBankWindow_Smellers.style.display = DisplayStyle.None;
             stankBankWindow_STANKS.BringToFront();
         }
-        void ShowSTANKReactionsTab(){
+        void ShowSTANKResponsesTab(){
+            stankBankWindow_STANKS.style.display = DisplayStyle.None;
+            stankBankWindow_STANKResponses.style.display = DisplayStyle.Flex;
+            stankBankWindow_Fellers.style.display = DisplayStyle.None;
+            stankBankWindow_Smellers.style.display = DisplayStyle.None;
             stankBankWindow_STANKResponses.BringToFront();
         }
         void ShowSmellersTab(){
