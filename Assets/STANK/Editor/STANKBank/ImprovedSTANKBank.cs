@@ -146,15 +146,17 @@ namespace STANK {
 
         void ShowSTANKSTab(){
             stankBankWindow_STANKS.AddToClassList(currentlySelectedTabClassName);
+            stankBankWindow_STANKS.RemoveFromClassList(unselectedContentClassName);
             stankBankWindow_STANKResponses.RemoveFromClassList(currentlySelectedTabClassName);
             stankBankWindow_STANKResponses.AddToClassList(unselectedContentClassName);
         }
         void ShowSTANKResponsesTab(){
             stankBankWindow_STANKResponses.AddToClassList(currentlySelectedTabClassName);
+            stankBankWindow_STANKResponses.RemoveFromClassList(unselectedContentClassName);
             stankBankWindow_STANKS.RemoveFromClassList(currentlySelectedTabClassName);
             stankBankWindow_STANKS.AddToClassList(unselectedContentClassName);
         }
-        
+
         void ShowSmellersTab(){
             
         }
