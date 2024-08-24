@@ -25,11 +25,19 @@ namespace STANK {
         // Descriptive name of the Stank.    
         public string Description = "";
         // Icon to display in HUD
-        public Texture2D Icon;
-        public Material HUDMaterial;
+        public Texture2D Icon = null;
+        public Material HUDMaterial = null;
 
-        [HideInInspector] public Image HUDIcon;
+        [HideInInspector] public Image HUDIcon = null;
         // Particle system that emits the Stank
-        [HideInInspector] public Smeller Smeller;
+        [HideInInspector] public Smeller Smeller = null;
+
+        [ExecuteInEditMode]
+        void OnEnable(){
+            Icon = new Texture2D(128, 128, TextureFormat.ARGB32, false);
+            HUDMaterial = new Material(Shader.Find("Sprites/Default"));
+        }
     }
+
+
 }

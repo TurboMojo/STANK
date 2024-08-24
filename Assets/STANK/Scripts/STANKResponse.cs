@@ -34,8 +34,8 @@ namespace STANK {
 
         private readonly List<STANKResponseListener> listeners = new List<STANKResponseListener>();
 
-        void Awake(){
-            
+        void OnEnable(){
+            AnimationClip = new AnimationClip();
         }
 
         public void Respond(){
@@ -47,6 +47,7 @@ namespace STANK {
 
 
         public void RegisterListener(STANKResponseListener listener){
+            if(listeners == null) return;
             delayTimer = 0;
             if(!listeners.Contains(listener)) {
                 //Debug.Log("Registering listener: "+listener.name);
@@ -57,7 +58,8 @@ namespace STANK {
         }
 
         public void UnregisterListener(STANKResponseListener listener){
-            
+            if(listeners == null) return;
+            AnimationClip = null;
             if(listeners.Contains(listener)) listeners.Remove(listener);
             else Debug.Log("Listener already unregistered");            
         }
