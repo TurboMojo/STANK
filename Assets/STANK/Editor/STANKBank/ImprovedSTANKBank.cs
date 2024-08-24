@@ -65,6 +65,8 @@ namespace STANK {
         SerializedProperty responseDelayProperty;
         SerializedProperty AnimationClipProperty;
         
+        private const string currentlySelectedTabClassName = "currentlySelectedTab";
+        private const string unselectedContentClassName = "unselectedContent";
 
         private void OnEnable(){
             if (Vault == null) Vault = this; else GameObject.Destroy(this);
@@ -143,19 +145,16 @@ namespace STANK {
         }
 
         void ShowSTANKSTab(){
-            stankBankWindow_STANKS.style.display = DisplayStyle.Flex;
-            stankBankWindow_STANKResponses.style.display = DisplayStyle.None;
-            //stankBankWindow_Fellers.style.display = DisplayStyle.None;
-            //stankBankWindow_Smellers.style.display = DisplayStyle.None;
-            stankBankWindow_STANKS.BringToFront();
+            stankBankWindow_STANKS.AddToClassList(currentlySelectedTabClassName);
+            stankBankWindow_STANKResponses.RemoveFromClassList(currentlySelectedTabClassName);
+            stankBankWindow_STANKResponses.AddToClassList(unselectedContentClassName);
         }
         void ShowSTANKResponsesTab(){
-            stankBankWindow_STANKS.style.display = DisplayStyle.None;
-            stankBankWindow_STANKResponses.style.display = DisplayStyle.Flex;
-            //stankBankWindow_Fellers.style.display = DisplayStyle.None;
-            //stankBankWindow_Smellers.style.display = DisplayStyle.None;
-            stankBankWindow_STANKResponses.BringToFront();
+            stankBankWindow_STANKResponses.AddToClassList(currentlySelectedTabClassName);
+            stankBankWindow_STANKS.RemoveFromClassList(currentlySelectedTabClassName);
+            stankBankWindow_STANKS.AddToClassList(unselectedContentClassName);
         }
+        
         void ShowSmellersTab(){
             
         }
