@@ -110,7 +110,7 @@ namespace STANK {
             Debug.Log("SaveOdor");
             AssetDatabase.CreateAsset(newOdor, "Assets/STANK/SOStank/Odors/Chemicals/" + nameProperty.stringValue + ".asset");
             AssetDatabase.SaveAssets();
-            ImprovedSTANKBank.Vault.RefreshSTANKListView();
+            STANKBank.Vault.RefreshSTANKListView();
             CreateNewOdor();
         }
 
@@ -134,7 +134,7 @@ namespace STANK {
             odorParticleSpeed.BindProperty(particleSpeedProperty);
             scentMemoryCurve.BindProperty(scentMemoryProperty);
             UpdateHUDImagePreview();
-            ImprovedSTANKBank.Vault.RefreshSTANKListView();
+            STANKBank.Vault.RefreshSTANKListView();
         }
 
         private void UpdateHUDImagePreview()
