@@ -12,10 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 891b1f39f5121a04b841126ff22ffc0e, type: 3}
   m_Name: NPCPuke2
   m_EditorClassIdentifier: 
-  stank: {fileID: 11400000, guid: 1bdf5509d9ab059439779395725e1bd0, type: 2}
-  pungencyThreshold: 0.5
-  responseDelay: 10
-  delayTimer: 10
+  Stank: {fileID: 11400000, guid: 1bdf5509d9ab059439779395725e1bd0, type: 2}
+  PungencyThreshold: 0.5
+  ResponseDelay: 10
+  DelayTimer: 0
   AnimationClip: {fileID: 0}
-  ResponseAudio: []
-  RagdollRoot: {fileID: 0}

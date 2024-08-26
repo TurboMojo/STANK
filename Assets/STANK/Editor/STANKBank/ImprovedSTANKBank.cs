@@ -12,33 +12,43 @@ namespace STANK {
     public class ImprovedSTANKBank : EditorWindow
     {
         public static ImprovedSTANKBank Vault;
+        private const string currentlySelectedTabClassName = "selected";
+        private const string unselectedContentClassName = "hidden";
 
         // Elements of the UIDocument
         VisualElement rootAsset;
         Texture2D defaultImageGridTexture;
-
-        VisualElement stankBankDetailsWindow;
-        UIDocument stankBankAsset;        
-
-        // STANKS tab elements
-        VisualTreeAsset stankDetailsAsset;
-        VisualTreeAsset stankListItem;
-        VisualElement stankBankWindow_STANKS;
-        VisualElement stankBankWindow_STANKResponses;
-        VisualElement stankBankWindow_Smellers;
-        VisualElement stankBankWindow_Fellers;
         
-        ListView stankListView;
+        UIDocument stankBankAsset;    
         List<Stank> allSTANKs = new List<Stank>();
-        List<STANKResponse> allSTANKResponses = new List<STANKResponse>();
+        List<STANKResponse> allSTANKResponses = new List<STANKResponse>();    
+        List<Smeller> allSmellers = new List<Smeller>();
+        List<Feller> allFellers = new List<Feller>();
+        
+
+        // Toolbar
+        ToolbarButton stanksButton;
+        ToolbarButton stankResponsesButton;
+        ToolbarButton smellersButton;
+        ToolbarButton fellersButton;
+        
+        // Content panels
+        ListView stankListView;
+        VisualElement stankBankTab_STANKS;
+        VisualElement stankBankTab_STANKResponses;
+        VisualElement stankBankTab_Smellers;
+        VisualElement stankBankTab_Fellers;
+
+        // STANKS tab elements        
         ObjectField iconField;
         VisualElement stankHudSpriteField;
-        VisualElement stankDetailsModule;
         SerializedProperty spriteProperty;
         Button deleteSTANKButton;
         Stank selectedSTANK;
         SerializedObject serializedSelectedSTANK;
 
+        // STANKResponse tab elements
+        ListView stankResponseListView;
         STANKResponse selectedSTANKResponse;
         SerializedObject serializedSelectedSTANKResponse;
         SerializedProperty nameProperty;
@@ -47,10 +57,6 @@ namespace STANK {
         TextField stankNameField;
         TextField stankDescriptionField;    
         ColorField gizmoColorField;
-        ToolbarButton stanksButton;
-        ToolbarButton stankResponsesButton;
-        ToolbarButton smellersButton;
-        ToolbarButton fellersButton;
         ObjectField hudMaterialField;
         
         // STANKReactions tab elements
@@ -65,36 +71,45 @@ namespace STANK {
         SerializedProperty responseDelayProperty;
         SerializedProperty AnimationClipProperty;
         
-        private const string currentlySelectedTabClassName = "currentlySelectedTab";
-        private const string unselectedContentClassName = "unselectedContent";
+        // Smellers tab elements
+        ListView smellersListView;
+        ObjectField smellerStankField;
+        FloatField smellerRadiusField;
+        CurveField pungencyCurveField;
+        FloatField expansionRateField;
+        Toggle showStankLinesToggle;
+        PropertyField stankLinesEmittersField;
+
+        // Fellers tab elements
+        ListView fellersListView;
+
 
         private void OnEnable(){
             if (Vault == null) Vault = this; else GameObject.Destroy(this);
             
             defaultImageGridTexture = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/STANK/Editor/Textures/defaultimagegrid.png");
-            Debug.Log("defaultImageGridTexture: "+defaultImageGridTexture);
-
+            
             BuildBANKWindow();
             BuildToolBar();
             BuildSTANKSTab();
             BuildSTANKResponsesTab();
-            ShowSTANKSTab();
-            //if(deleteSTANKButton == null) Debug.Log("deleteSTANKButton not found");
-            //deleteSTANKButton.clicked += DeleteSTANK;
+            //BuildFellersTab();
+            //BuildSmellersTab();
+
             spriteProperty = null;
         }
 
         void BuildToolBar(){
-            Debug.Log("building toolbar");
+            
             stanksButton = rootAsset.Q<ToolbarButton>("STANKsToolbarButton");            
-            stankResponsesButton = rootAsset.Q<ToolbarButton>("STANKReactionsToolbarButton");            
+            stankResponsesButton = rootAsset.Q<ToolbarButton>("STANKResponsesToolbarButton");            
             smellersButton = rootAsset.Q<ToolbarButton>("SmellersToolbarButton");            
             fellersButton = rootAsset.Q<ToolbarButton>("FellersToolbarButton");            
 
             stanksButton.clicked += ShowSTANKSTab;
             stankResponsesButton.clicked += ShowSTANKResponsesTab;
             smellersButton.clicked += ShowSmellersTab;
-            fellersButton.clicked += ShowFellersTab;
+
         }
 
         void BuildBANKWindow(){
@@ -102,67 +117,103 @@ namespace STANK {
             // Load the elements of the UIDocument
             rootAsset = stankBankDocument.CloneTree();
             if(rootAsset == null) Debug.Log("rootAsset not found");
-            rootVisualElement.Add(rootAsset);
-            stankBankDetailsWindow = rootAsset.Q<VisualElement>("STANKBankMainPanel");
-            stankBankWindow_STANKS = rootAsset.Q<VisualElement>("STANKsDetailsWindow");
-            stankBankDetailsWindow.Add(stankBankWindow_STANKS);
-            stankBankDetailsWindow.Add(stankBankWindow_STANKResponses);
-            //stankBankDetailsWindow.Add(stankBankWindow_Smellers);
-            //stankBankDetailsWindow.Add(stankBankWindow_Fellers);
+            rootVisualElement.Add(rootAsset);            
+            stankBankTab_STANKS = rootAsset.Q<VisualElement>("STANKsDetails");  
+            if(stankBankTab_STANKS == null) Debug.Log("stankBankWindow_STANKS not found");          
+            stankBankTab_STANKResponses = rootAsset.Q<VisualElement>("STANKResponsesTab");
+            stankBankTab_Smellers = rootAsset.Q<VisualElement>("SmellersTab");
+            stankBankTab_Fellers = rootAsset.Q<VisualElement>("FellersTab");
         }
 
         void BuildSTANKSTab(){
-            if(stankBankWindow_STANKS == null) Debug.Log("stankBankWindow_STANKS not found");
-            stankListView = stankBankWindow_STANKS.Q<ListView>("STANKSListView");
-            stankBankWindow_STANKS = stankBankDetailsWindow.Q<VisualElement>("STANKsDetailsWindow");
-            stankBankWindow_STANKResponses = stankBankDetailsWindow.Q<VisualElement>("STANKResponsesDetailsWindow");
-            if(stankBankWindow_STANKS == null) Debug.Log("stankBankWindow_STANKS not found");
-            stankDetailsModule = stankBankWindow_STANKS.Q<VisualElement>("STANKsDetailsWindow");
-            if(stankDetailsModule == null) Debug.Log("stankDetailsModule not found");
-            iconField = stankDetailsModule.Q<ObjectField>("IconField");
+            if(stankBankTab_STANKS == null) Debug.Log("stankBankWindow_STANKS not found");
+            stankListView = rootAsset.Q<ListView>("STANKSListView");
+            stankListView.selectionChanged += OnSTANKSelectionChange;
+            stankBankTab_STANKS = rootAsset.Q<VisualElement>("STANKsDetails");            
+            if(stankBankTab_STANKS == null) Debug.Log("stankBankWindow_STANKS not found");            
+            iconField = stankBankTab_STANKS.Q<ObjectField>("IconField");
             if(iconField == null) Debug.Log("IconField not found");
-            stankHudSpriteField = stankDetailsModule.Q<ObjectField>("IconField");
-            deleteSTANKButton = stankDetailsModule.Q<Button>("DeleteSTANKButton");
-            //VisualElement stanksDetailsPanel = stankDetailsModule.Q<VisualElement>("STANKDetailsPanel");
-            //if(stanksDetailsPanel == null) Debug.Log("stanksDetailsPanel not found");
-            //stanksDetailsPanel.Add(stankDetailsModule);
-            stankNameField = stankDetailsModule.Q<TextField>("NameField");
-            stankDescriptionField = stankDetailsModule.Q<TextField>("DescriptionField");
-            gizmoColorField = stankDetailsModule.Q<ColorField>("GizmoColorField");
-            hudMaterialField = stankDetailsModule.Q<ObjectField>("HUDMaterialField");
+            stankHudSpriteField = stankBankTab_STANKS.Q<ObjectField>("IconField");
+            stankNameField = stankBankTab_STANKS.Q<TextField>("NameField");
+            stankDescriptionField = stankBankTab_STANKS.Q<TextField>("DescriptionField");
+            gizmoColorField = stankBankTab_STANKS.Q<ColorField>("GizmoColorField");
+            hudMaterialField = stankBankTab_STANKS.Q<ObjectField>("HUDMaterialField");            
+            stankHudSpriteField = rootAsset.Q<VisualElement>("IconPreview");
+            deleteSTANKButton = stankBankTab_STANKS.Q<Button>("DeleteSTANKButton");
+            deleteSTANKButton.clicked += DeleteSTANK;
         }
 
-        void BuildSTANKResponsesTab(){
-            
+        void BuildSTANKResponsesTab() {
+            stankResponseListView = stankBankTab_STANKResponses.Q<ListView>("STANKResponseListView");            
+            stankResponseListView.selectionChanged += OnSTANKResponseSelectionChange;
+            responseStankField = stankBankTab_STANKResponses.Q<ObjectField>("STANKField");
+            pungencyThresholdField = stankBankTab_STANKResponses.Q<FloatField>("PungencyThresholdField");
+            responseDelayField = stankBankTab_STANKResponses.Q<FloatField>("ResponseDelayField");
+            AnimationClipField = stankBankTab_STANKResponses.Q<ObjectField>("AnimationClipField");
+            if(AnimationClipField == null) Debug.Log("AnimationClipField not found");
+            deleteResponsesButton = stankBankTab_STANKResponses.Q<Button>("DeleteSTANKResponseButton");
         }
 
-        void BuildFellersTab(){
-            
+        void BuildSmellersTab() {
+            smellersListView = stankBankTab_Smellers.Q<ListView>("SmellersListView");
+            smellerStankField = stankBankTab_Smellers.Q<ObjectField>("SmellerStankField");
+            smellerRadiusField = stankBankTab_Smellers.Q<FloatField>("SmellerRadiusField");
+            pungencyCurveField = stankBankTab_Smellers.Q<CurveField>("PungencyCurveField");
+            expansionRateField = stankBankTab_Smellers.Q<FloatField>("ExpansionRateField");
+            showStankLinesToggle = stankBankTab_Smellers.Q<Toggle>("ShowStankLinesToggle");
+            stankLinesEmittersField = stankBankTab_Smellers.Q<PropertyField>("StankLinesEmittersField");
         }
 
-        void BuildSmellersTab(){
+        void BuildFellersTab() {
             
         }
 
         void ShowSTANKSTab(){
-            stankBankWindow_STANKS.AddToClassList(currentlySelectedTabClassName);
-            stankBankWindow_STANKS.RemoveFromClassList(unselectedContentClassName);
-            stankBankWindow_STANKResponses.RemoveFromClassList(currentlySelectedTabClassName);
-            stankBankWindow_STANKResponses.AddToClassList(unselectedContentClassName);
+            RefreshSTANKListView();
+            stankBankTab_STANKS.AddToClassList(currentlySelectedTabClassName);
+            stankBankTab_STANKS.RemoveFromClassList(unselectedContentClassName);
+            stankBankTab_STANKResponses.RemoveFromClassList(currentlySelectedTabClassName);
+            stankBankTab_STANKResponses.AddToClassList(unselectedContentClassName);            
+            stankBankTab_Smellers.RemoveFromClassList(currentlySelectedTabClassName);
+            stankBankTab_Smellers.AddToClassList(unselectedContentClassName);
+            //stankBankTab_Fellers.RemoveFromClassList(currentlySelectedTabClassName);
+            //stankBankTab_Fellers.AddToClassList(unselectedContentClassName);
         }
+
         void ShowSTANKResponsesTab(){
-            stankBankWindow_STANKResponses.AddToClassList(currentlySelectedTabClassName);
-            stankBankWindow_STANKResponses.RemoveFromClassList(unselectedContentClassName);
-            stankBankWindow_STANKS.RemoveFromClassList(currentlySelectedTabClassName);
-            stankBankWindow_STANKS.AddToClassList(unselectedContentClassName);
+            RefreshSTANKResponseListView();
+            stankBankTab_STANKResponses.AddToClassList(currentlySelectedTabClassName);
+            stankBankTab_STANKResponses.RemoveFromClassList(unselectedContentClassName);
+            stankBankTab_STANKS.RemoveFromClassList(currentlySelectedTabClassName);
+            stankBankTab_STANKS.AddToClassList(unselectedContentClassName);
+            stankBankTab_Smellers.RemoveFromClassList(currentlySelectedTabClassName);
+            stankBankTab_Smellers.AddToClassList(unselectedContentClassName);
+            //stankBankTab_Fellers.RemoveFromClassList(currentlySelectedTabClassName);
+            //stankBankTab_Fellers.AddToClassList(unselectedContentClassName);
         }
 
         void ShowSmellersTab(){
-            
+            RefreshSmellerListView();
+            stankBankTab_Smellers.RemoveFromClassList(unselectedContentClassName);
+            stankBankTab_Smellers.AddToClassList(currentlySelectedTabClassName);
+            stankBankTab_STANKResponses.AddToClassList(unselectedContentClassName);
+            stankBankTab_STANKResponses.RemoveFromClassList(currentlySelectedTabClassName);
+            stankBankTab_STANKS.RemoveFromClassList(currentlySelectedTabClassName);
+            stankBankTab_STANKS.AddToClassList(unselectedContentClassName);            
+            //stankBankTab_Fellers.RemoveFromClassList(currentlySelectedTabClassName);
+            //stankBankTab_Fellers.AddToClassList(unselectedContentClassName);
         }
 
         void ShowFellersTab(){
-            
+            RefreshFellerListView();
+            stankBankTab_Smellers.RemoveFromClassList(unselectedContentClassName);
+            stankBankTab_Smellers.AddToClassList(currentlySelectedTabClassName);
+            stankBankTab_STANKResponses.AddToClassList(unselectedContentClassName);
+            stankBankTab_STANKResponses.RemoveFromClassList(currentlySelectedTabClassName);
+            stankBankTab_STANKS.RemoveFromClassList(currentlySelectedTabClassName);
+            stankBankTab_STANKS.AddToClassList(unselectedContentClassName);            
+            //stankBankTab_Fellers.RemoveFromClassList(currentlySelectedTabClassName);
+            //stankBankTab_Fellers.AddToClassList(unselectedContentClassName);
         }
 
         public void CreateGUI()
@@ -170,61 +221,50 @@ namespace STANK {
             if(rootAsset == null) Debug.Log("rootAsset not found");
             stankListView = rootAsset.Q<ListView>("STANKSListView");
             
-            RefreshSTANKListView();
-            if(stankListView != null) stankListView.AddToSelection(0);
-            else Debug.Log("stankListView is null");
-            //RefreshSTANKResponseListView();
-            stankHudSpriteField = rootAsset.Q<VisualElement>("IconPreview");
-            deleteSTANKButton.clicked += DeleteSTANK;
-            
+            ShowSTANKSTab();
             UpdateHUDImagePreview();
         }       
 
         private void OnSTANKSelectionChange(IEnumerable<object> selectedItems)
-        {
-            
+        {            
             // Update the window when we change STANK selections
             selectedSTANK = selectedItems.First() as Stank;
             serializedSelectedSTANK = new SerializedObject(selectedSTANK as UnityEngine.Object);
-            if (serializedSelectedSTANK == null)
-            {
-                Debug.Log("serializedSelectedSTANK not found");
-                return;
-            } else {
-                Debug.Log(serializedSelectedSTANK.ToString());
-            }
-
             spriteProperty = serializedSelectedSTANK.FindProperty("Icon");
             nameProperty = serializedSelectedSTANK.FindProperty("Name");
             descriptionProperty = serializedSelectedSTANK.FindProperty("Description");            
             gizmoColorProperty = serializedSelectedSTANK.FindProperty("GizmoColor");
 
             if(iconField != null && spriteProperty != null) iconField.BindProperty(spriteProperty);
-            else Debug.Log(("spriteProperty not found"));
+            else if(spriteProperty == null)Debug.Log(("spriteProperty not found"));
+            else if(iconField == null)Debug.Log("iconField is null");
             //UpdateHUDImagePreview();
             if(nameProperty != null) stankNameField.BindProperty(nameProperty);
             else Debug.Log(("nameProperty not found"));
             if(descriptionProperty != null) stankDescriptionField.BindProperty(descriptionProperty);
             else Debug.Log(("descriptionProperty not found"));
             if(gizmoColorProperty != null) gizmoColorField.BindProperty(gizmoColorProperty);
-            else Debug.Log(("gizmoColorProperty not found"));
-            
+            else Debug.Log(("gizmoColorProperty not found"));            
         } 
 
         private void OnSTANKResponseSelectionChange(IEnumerable<object> selectedItems)
         {            
             // Update the window when we change STANK selections
             selectedSTANKResponse = selectedItems.First() as STANKResponse;
-            serializedSelectedSTANKResponse = new SerializedObject(selectedItems.First() as UnityEngine.Object);
+            serializedSelectedSTANKResponse = new SerializedObject(selectedSTANKResponse as UnityEngine.Object);
             if (serializedSelectedSTANKResponse == null)
             {                
+                Debug.Log("serializedSelectedSTANKResponse is null");
                 return;
-            }
-
+            } 
             responseStankProperty = serializedSelectedSTANKResponse.FindProperty("Stank");
+            if(responseStankProperty == null) Debug.Log("response StankProperty not found");
             pungencyThresholdProperty = serializedSelectedSTANKResponse.FindProperty("PungencyThreshold");
+            if(pungencyThresholdProperty == null) Debug.Log("pungencyThresholdProperty not found");
             responseDelayProperty = serializedSelectedSTANKResponse.FindProperty("ResponseDelay");
+            if(responseDelayProperty == null) Debug.Log("responseDelayProperty not found");
             AnimationClipProperty = serializedSelectedSTANKResponse.FindProperty("AnimationClip");
+            if(AnimationClipProperty == null) Debug.Log("AnimationClipProperty not found");
 
             responseStankField.BindProperty(responseStankProperty);
             pungencyThresholdField.BindProperty(pungencyThresholdProperty);
@@ -281,41 +321,90 @@ namespace STANK {
             }
             
             stankListView.Rebuild();
-            stankListView.selectionChanged += OnSTANKSelectionChange;
+            stankListView.AddToSelection(0);
         }
 
         public void RefreshSTANKResponseListView()
         {
-            // Clear the list view and rebuild it
-            CreateSTANKResponseListView();
+            // if (stankResponseListView == null) Debug.Log("stankResponseListView not found");
 
-            if (stankListView == null) Debug.Log("stankListView not found");
-
-            var allOdorGuids = AssetDatabase.FindAssets("t:STANKResponse");
+            var allSTANKResponseGuids = AssetDatabase.FindAssets("t:STANKResponse");
             allSTANKResponses.Clear();
-            foreach (var guid in allOdorGuids)
+            foreach (var guid in allSTANKResponseGuids)
             {
                 allSTANKResponses.Add(AssetDatabase.LoadAssetAtPath<STANKResponse>(AssetDatabase.GUIDToAssetPath(guid)));
             }
-            stankListView.Rebuild();
+
+            // Clear the list view and rebuild it
+            CreateSTANKResponseListView();
+            stankResponseListView.Rebuild();
+            stankResponseListView.AddToSelection(0);
         }
-
-
 
         private void CreateSTANKResponseListView()
         {
-            // Initialize the list view with all sprites' names
-            stankListView.Clear();        
-            stankListView.makeItem = () => new Label();
-            stankListView.bindItem = (item, index) => { (item as Label).text = allSTANKResponses[index].name; };
-            stankListView.itemsSource = allSTANKResponses;
+            // Initialize the list view with all STANKResponse names
+            stankResponseListView.Clear();        
+            stankResponseListView.makeItem = () => new Label();
+            stankResponseListView.bindItem = (item, index) => { (item as Label).text = allSTANKResponses[index].name; };
+            stankResponseListView.itemsSource = allSTANKResponses;
+        }
+
+        private void CreateSmellerListView(){
+            // Initialize the list view with all Smeller names
+            smellersListView.Clear();        
+            smellersListView.makeItem = () => new Label();
+            smellersListView.bindItem = (item, index) => { (item as Label).text = allSmellers[index].name; };
+            smellersListView.itemsSource = allSmellers;
+        }
+
+        public void RefreshSmellerListView()
+        {
+            // if (stankResponseListView == null) Debug.Log("stankResponseListView not found");
+
+            var allSmellerGuids = AssetDatabase.FindAssets("t:Smeller");
+            allSmellers.Clear();
+            foreach (var guid in allSmellerGuids)
+            {
+                allSmellers.Add(AssetDatabase.LoadAssetAtPath<Smeller>(AssetDatabase.GUIDToAssetPath(guid)));
+            }
+
+            // Clear the list view and rebuild it
+            CreateSmellerListView();
+            smellersListView.Rebuild();
+            smellersListView.AddToSelection(0);
+        }
+
+        private void CreateFellerListView(){
+            // Initialize the list view with all Smeller names
+            fellersListView.Clear();        
+            fellersListView.makeItem = () => new Label();
+            fellersListView.bindItem = (item, index) => { (item as Label).text = allFellers[index].name; };
+            fellersListView.itemsSource = allFellers;
+        }
+
+        public void RefreshFellerListView()
+        {
+            // if (stankResponseListView == null) Debug.Log("stankResponseListView not found");
+
+            var allFellerGuids = AssetDatabase.FindAssets("t:Feller");
+            allSTANKResponses.Clear();
+            foreach (var guid in allFellerGuids)
+            {
+                allFellers.Add(AssetDatabase.LoadAssetAtPath<Feller>(AssetDatabase.GUIDToAssetPath(guid)));
+            }
+
+            // Clear the list view and rebuild it
+            CreateSTANKResponseListView();
+            fellersListView.Rebuild();
+            fellersListView.AddToSelection(0);
         }
 
         private void UpdateHUDImagePreview()
         {
             // If the sprite is not null, set the background image to the sprite
             // If the sprite is null, populate it with our default grid image
-            if(iconField == null) { Debug.Log("spriteImage not found"); return;}
+            if(iconField == null) { Debug.Log("iconField not found"); return;}
             if(stankHudSpriteField == null) { Debug.Log("stankHudSpriteField not found"); return;}
             if (iconField.value != null)
             {

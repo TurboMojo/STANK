@@ -16,30 +16,31 @@ namespace STANK {
         // Can trigger an AnimationClip, which is built into the AnimatorController by STANKYLeg
         // The responseVFX ParticleSystem is intended for things like tears, vomit, etc.
         // STANKResponseAudio
-        [Header("Required Fields")]
-        public Stank stank;
+        //[Header("Required Fields")]
+        public Stank Stank;
         // STANKTolerance object that defines the threshold for this response.
-        public float pungencyThreshold = 0.5f;
+        public float PungencyThreshold = 0.5f ;
         [Tooltip("Minimum amount of time required between responses, prevents infinite puke loops")]
         [Min(0.1f)]
-        public float responseDelay = 10.0f;      
-        public float delayTimer = 0.0f;
+        public float ResponseDelay = 10.0f;      
+        public float DelayTimer = 0.0f;
         
-        [Header("Optional Fields")]
+        //[Header("Optional Fields")]
         // AnimationClip will be triggered when toleranceThreshold is reached.  This does not need to be added to your AnimatorController.  STANKYLeg will do it for you.
-        public AnimationClip AnimationClip;    
+        public AnimationClip AnimationClip;
 
         // Ragdoll support is intended for actions such as fainting or death.  If this is set, isKinematic on all Rigidbodies in the RagdollRoot will be disabled.
         //public Rigidbody RagdollRoot;
 
         private readonly List<STANKResponseListener> listeners = new List<STANKResponseListener>();
 
+        [ExecuteInEditMode]
         void OnEnable(){
-            AnimationClip = new AnimationClip();
+            //AnimationClip = new AnimationClip();
         }
 
         public void Respond(){
-            delayTimer = responseDelay;
+            DelayTimer = ResponseDelay;
             for(int i = 0; i < listeners.Count; i++){
                 listeners[i].OnEventRaised(this);
             }
@@ -48,7 +49,7 @@ namespace STANK {
 
         public void RegisterListener(STANKResponseListener listener){
             if(listeners == null) return;
-            delayTimer = 0;
+            DelayTimer = 0;
             if(!listeners.Contains(listener)) {
                 //Debug.Log("Registering listener: "+listener.name);
                 listeners.Add(listener);
@@ -65,7 +66,7 @@ namespace STANK {
         }
 
         void Update(){
-            if(delayTimer > 0) delayTimer -= Time.deltaTime;
+            if(DelayTimer > 0) DelayTimer -= Time.deltaTime;
         }
     }
 }

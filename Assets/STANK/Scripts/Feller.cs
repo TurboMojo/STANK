@@ -85,9 +85,9 @@ namespace STANK {
                         responses.Remove(response);
                         continue;
                     }
-                    if (response.pungencyThreshold > highestToleranceValue)
+                    if (response.PungencyThreshold > highestToleranceValue)
                     {
-                        highestToleranceValue = response.pungencyThreshold;
+                        highestToleranceValue = response.PungencyThreshold;
                     }
                 }
             }
@@ -175,12 +175,12 @@ namespace STANK {
             {
                 
                 foreach(STANKResponse response in responses){
-                    if(o.name == response.stank.name){                        
+                    if(o.name == response.Stank.name){                        
                         
                         /* Debug.Log(o.name+ "pungency: "+o.Pungency);
                         Debug.Log("Threshold: "+perceivedResponse.pungencyThreshold);
                         Debug.Log("Delay timer: "+perceivedResponse.delayTimer); */
-                        if (o.Pungency > response.pungencyThreshold && response.delayTimer <= 0)
+                        if (o.Pungency > response.PungencyThreshold && response.DelayTimer <= 0)
                         {                  
                             Debug.Log("Response triggered: "+ response.name);     
                             response.Respond();

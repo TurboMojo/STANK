@@ -12,11 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 891b1f39f5121a04b841126ff22ffc0e, type: 3}
   m_Name: Puke
   m_EditorClassIdentifier: 
-  stank: {fileID: 11400000, guid: 1bdf5509d9ab059439779395725e1bd0, type: 2}
-  toleranceThreshold: {fileID: 11400000, guid: 48209aa97a2fce844ab482a3cfeca332, type: 2}
-  AnimationClip: {fileID: 7400000, guid: 8ef38f16a2f5f8f42906732232fe0152, type: 2}
-  responseVFX:
-  - {fileID: 5521053766137284742, guid: d1430d84ba3d1c04c82d46fc26e8a3fc, type: 3}
-  responseScreenVFX: []
-  ResponseAudio: []
-  RagdollRoot: {fileID: 0}
+  Stank: {fileID: 11400000, guid: 1bdf5509d9ab059439779395725e1bd0, type: 2}
+  PungencyThreshold: 0.5
+  ResponseDelay: 10
+  DelayTimer: 0
+  AnimationClip: {fileID: 0}

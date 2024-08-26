@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 891b1f39f5121a04b841126ff22ffc0e, type: 3}
   m_Name: Sneeze
   m_EditorClassIdentifier: 
-  stank: {fileID: 11400000, guid: f8cbbca3294497f469b05f95eec30cf8, type: 2}
-  toleranceThreshold: {fileID: 0}
-  AnimationClip: {fileID: 7400000, guid: 9915a52844f6c6041ac06590920ba67f, type: 2}
-  responseVFX: []
-  responseScreenVFX: []
-  ResponseAudio: []
+  Stank: {fileID: 11400000, guid: f8cbbca3294497f469b05f95eec30cf8, type: 2}
+  PungencyThreshold: 0.5
+  ResponseDelay: 10
+  DelayTimer: 0
+  AnimationClip: {fileID: 0}

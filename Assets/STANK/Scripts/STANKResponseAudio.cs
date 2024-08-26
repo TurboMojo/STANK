@@ -16,7 +16,7 @@ namespace STANK {
 
         public void ProcessThreshold(STANKResponse response){
             foreach(STANKResponse a in stankResponse){
-                if(a.stank.name == response.stank.name){
+                if(a.Stank.name == response.Stank.name){
                     if(aSource.isPlaying == false) aSource.Play();
                 }
             }

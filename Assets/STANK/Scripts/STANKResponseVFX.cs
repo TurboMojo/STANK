@@ -21,9 +21,9 @@ namespace STANK {
 
         public void ProcessThreshold(STANKResponse response){
             
-            if(response.stank.name == stank.name && reactionTimer <= 0){
+            if(response.Stank.name == stank.name && reactionTimer <= 0){
                 ps.Play();
-                reactionTimer = response.responseDelay;
+                reactionTimer = response.ResponseDelay;
             }
         }
     }

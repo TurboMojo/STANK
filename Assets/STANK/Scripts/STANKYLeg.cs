@@ -172,7 +172,7 @@ namespace STANK {
             // Create a Trigger parameter in the AnimatorController named for the Stank defined in response
             AnimatorControllerParameter p = new AnimatorControllerParameter();
             p.type = AnimatorControllerParameterType.Trigger;
-            p.name = response.stank.name;
+            p.name = response.Stank.name;
             ac.AddParameter(p);
 
             // Assign the AnimationClip to the state
@@ -180,12 +180,12 @@ namespace STANK {
 
             // Create a Trigger transition from the Entry node to the new state
             AnimatorTransitionBase entryToStateTransition = layer.stateMachine.AddAnyStateTransition(state);
-            entryToStateTransition.AddCondition(AnimatorConditionMode.If, 0, response.stank.name);
+            entryToStateTransition.AddCondition(AnimatorConditionMode.If, 0, response.Stank.name);
             entryToStateTransition.destinationState = state;
 
             // Create a Trigger transition from the new state to the Exit node
             AnimatorTransitionBase stateToExitTransition = state.AddExitTransition();
-            stateToExitTransition.AddCondition(AnimatorConditionMode.If, 0, response.stank.name);
+            stateToExitTransition.AddCondition(AnimatorConditionMode.If, 0, response.Stank.name);
             stateToExitTransition.destinationState = GetStateByName(layer, "Exit");
 
             // Save the changes to the AnimatorController
@@ -198,7 +198,7 @@ namespace STANK {
             if (response.AnimationClip != null)
             {
                 anim.SetLayerWeight(anim.GetLayerIndex("StankyLeg"), 1f);
-                anim.SetTrigger(response.stank.name);
+                anim.SetTrigger(response.Stank.name);
                 layerTimer = response.AnimationClip.length;
             }
         }
