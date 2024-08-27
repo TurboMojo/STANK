@@ -16,7 +16,7 @@ MonoBehaviour:
   Pungency: 0.0035714286
   GizmoColor: {r: 0, g: 1, b: 0, a: 0.39215687}
   Description: The pungent stench of refuse.
-  Icon: {fileID: 0}
+  Icon: {fileID: 2800000, guid: e8b17fa0f57a69143aa9ed3f12a80a2b, type: 3}
   IconSprite: {fileID: 0}
   HUDMaterial: {fileID: 0}
   HUDIcon: {fileID: 0}

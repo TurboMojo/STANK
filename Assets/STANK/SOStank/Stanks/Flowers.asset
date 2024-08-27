@@ -16,7 +16,7 @@ MonoBehaviour:
   Pungency: 0.046590388
   GizmoColor: {r: 0.88494706, g: 1, b: 0, a: 0.39215687}
   Description: The blissful aroma of wildflowers, unless you're allergic.
-  Icon: {fileID: 0}
+  Icon: {fileID: 2800000, guid: 095f911acc82a0444b6c96d2d914d075, type: 3}
   IconSprite: {fileID: 0}
   HUDMaterial: {fileID: 0}
   HUDIcon: {fileID: 0}

@@ -5,47 +5,31 @@
         <uie:ToolbarButton text="STANKResponses" parse-escape-sequences="true" display-tooltip-when-elided="true" name="STANKResponsesToolbarButton" />
         <uie:ToolbarButton text="Smellers" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SmellersToolbarButton" class="hidden" />
     </uie:Toolbar>
-    <ui:VisualElement name="STANKBankMainPanel" class="section" style="flex-grow: 1; align-items: auto; flex-direction: column; display: flex; right: 0; bottom: 0;">
-        <ui:VisualElement name="STANKsTab" class="section selected" style="flex-grow: 1; flex-direction: row; left: auto; top: auto; position: relative;">
-            <ui:VisualElement name="STANKListViewVE" style="flex-grow: 1; left: auto; top: auto; position: relative; max-width: 50%; min-width: 25%; max-height: 100%; min-height: 100%;">
+    <ui:VisualElement name="STANKBankMainPanel" style="flex-grow: 1; align-items: auto; flex-direction: column; display: flex; right: 0; bottom: 0; position: relative; left: 0; top: auto; max-height: 100%; min-height: 100%;">
+        <ui:VisualElement name="STANKsTab" class="section selected" style="flex-grow: 1; flex-direction: row; left: auto; top: auto; position: relative; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; min-height: 100%; flex-basis: 100%;">
+            <ui:VisualElement name="STANKListViewVE" style="flex-grow: 1; left: auto; top: auto; position: relative; max-width: 50%; min-width: 30%; max-height: 100%; min-height: 100%; width: auto; align-items: auto;">
                 <ui:ListView focusable="true" name="STANKSListView" header-title="STANKs" class="section" style="width: auto; max-width: 50%; min-width: 25%; max-height: 100%; min-height: 100%; position: absolute; left: 0; top: 0;" />
             </ui:VisualElement>
-            <ui:VisualElement name="STANKsDetails" class="section" style="flex-grow: 1; min-width: 25%; max-width: 75%; max-height: 100%; min-height: 100%; align-items: stretch;">
-                <ui:VisualElement name="STANKsDetails" class="selected" style="flex-grow: 1;">
-                    <ui:VisualElement name="IconPreview" style="flex-grow: 1; width: 128px; height: 128px; max-width: 128px; max-height: 128px; min-width: 32px; min-height: 32px; align-items: auto; align-self: flex-end;" />
-                    <uie:ObjectField label="Icon" name="IconField" allow-scene-objects="false" type="UnityEngine.Texture2D, UnityEngine.CoreModule" style="align-items: flex-start;" />
-                    <ui:TextField picking-mode="Ignore" label="STANK Name" value="Enter name..." name="NameField" style="align-self: auto; align-items: flex-start;" />
-                    <uie:ColorField label="Color" value="RGBA(0.000, 1.000, 1.000, 1.000)" name="GizmoColorField" style="align-items: flex-start;" />
-                    <ui:TextField picking-mode="Ignore" label="Description" value="Enter description..." name="DescriptionField" multiline="true" style="align-items: flex-start;" />
-                    <uie:ObjectField label="HUDMaterial" name="HUDMaterialField" type="UnityEngine.Material, UnityEngine.CoreModule" style="visibility: visible; display: flex; justify-content: flex-start; align-items: flex-start;" />
-                    <ui:Button text="DELETE" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DeleteSTANKButton" style="background-color: rgb(255, 0, 0); -unity-font-style: bold; font-size: 24px; width: 146px; align-items: flex-end; align-self: flex-end;" />
-                </ui:VisualElement>
+            <ui:VisualElement name="STANKsDetails" style="flex-grow: 1; align-items: flex-start;">
+                <ui:VisualElement name="IconPreview" style="flex-grow: 1; width: 128px; height: 128px; max-width: 128px; max-height: 128px; min-width: 32px; min-height: 32px; align-items: auto; align-self: flex-end;" />
+                <uie:ObjectField label="Icon" name="IconField" allow-scene-objects="false" type="UnityEngine.Texture2D, UnityEngine.CoreModule" style="align-items: stretch;" />
+                <ui:TextField picking-mode="Ignore" label="STANK Name" value="Enter name..." name="NameField" style="align-self: auto; align-items: stretch;" />
+                <uie:ColorField label="Color" value="RGBA(0.000, 1.000, 1.000, 1.000)" name="GizmoColorField" style="align-items: stretch;" />
+                <ui:TextField picking-mode="Ignore" label="Description" value="Enter description..." name="DescriptionField" multiline="true" style="align-items: stretch;" />
+                <uie:ObjectField label="HUDMaterial" name="HUDMaterialField" type="UnityEngine.Material, UnityEngine.CoreModule" style="visibility: visible; display: flex; justify-content: flex-start; align-items: stretch;" />
+                <ui:Button text="DELETE" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DeleteSTANKButton" style="background-color: rgb(255, 0, 0); -unity-font-style: bold; font-size: 24px; width: 146px; align-items: stretch; align-self: flex-end;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="STANKResponsesTab" class="section hidden" style="flex-grow: 1; flex-direction: row;">
-            <ui:VisualElement name="STANKResponseListViewVE" style="flex-grow: 1;">
-                <ui:ListView focusable="true" name="STANKResponseListView" header-title="STANKs" class="section" style="width: auto; max-width: 50%; min-width: 25%; max-height: 100%; min-height: 100%; position: absolute; left: 0; top: 0;" />
+        <ui:VisualElement name="STANKResponsesTab" class="section hidden" style="flex-grow: 1; flex-direction: row; min-height: 100%; flex-basis: 100%;">
+            <ui:VisualElement name="STANKResponseListViewVE" style="flex-grow: 1; max-width: 50%; min-width: auto; max-height: 100%; min-height: 100%; align-items: auto;">
+                <ui:ListView focusable="true" name="STANKResponseListView" header-title="STANKs" class="section" style="width: auto; max-width: none; min-width: auto; max-height: 100%; min-height: 100%; position: absolute; left: 0; top: 0;" />
             </ui:VisualElement>
-            <ui:VisualElement name="STANKResponsesDetails" class="section" style="flex-grow: 1; max-width: 75%; max-height: 100%; min-width: 50%; min-height: 100%; position: relative; left: auto; top: auto; right: initial; visibility: visible;">
-                <uie:ObjectField label="STANK" name="STANKField" allow-scene-objects="false" type="STANK.Stank, Assembly-CSharp" style="align-items: flex-start;" />
+            <ui:VisualElement name="STANKResponsesDetails" style="flex-grow: 1; max-width: none; max-height: none; min-width: auto; min-height: auto; position: relative; left: auto; top: auto; right: auto; visibility: visible; align-items: flex-start; flex-basis: auto;">
+                <uie:ObjectField label="STANK" name="STANKField" allow-scene-objects="false" type="STANK.Stank, Assembly-CSharp" style="align-items: stretch; flex-basis: auto;" />
                 <ui:FloatField label="Pungency Threshold" value="0" name="PungencyThresholdField" />
                 <ui:FloatField label="Response Delay" value="0" name="ResponseDelayField" style="left: 0; top: 0;" />
-                <uie:ObjectField label="Animation Clip" name="AnimationClipField" type="UnityEngine.AnimationClip, UnityEngine.AnimationModule" />
+                <uie:ObjectField label="Animation Clip" name="AnimationClipField" type="UnityEngine.AnimationClip, UnityEngine.AnimationModule" style="align-items: stretch;" />
                 <ui:Button text="DELETE" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DeleteSTANKResponseButton" style="background-color: rgb(255, 0, 0); -unity-font-style: bold; font-size: 24px; width: 146px; align-items: flex-end; align-self: flex-end;" />
-            </ui:VisualElement>
-        </ui:VisualElement>
-        <ui:VisualElement name="SmellersTab" class="section hidden" style="flex-grow: 1; flex-direction: row;">
-            <ui:VisualElement name="SmellersListViewVE" style="flex-grow: 1;">
-                <ui:ListView focusable="true" name="SmellersListView" header-title="STANKs" class="section" style="width: auto; max-width: 50%; min-width: 25%; max-height: 100%; min-height: 100%; position: absolute; left: 0; top: 0;" />
-            </ui:VisualElement>
-            <ui:VisualElement name="SmellersDetails" class="section" style="flex-grow: 1; max-width: 75%; max-height: 100%; min-width: 50%; min-height: 100%; position: relative; left: auto; top: auto; right: initial; visibility: visible;">
-                <uie:ObjectField label="STANK" name="STANKField" allow-scene-objects="false" type="STANK.Stank, Assembly-CSharp" style="align-items: flex-start;" />
-                <ui:FloatField label="Radius" value="0" name="RadiusField" />
-                <uie:CurveField label="Pungency Curve" name="PungencyCurveField" />
-                <ui:FloatField label="Expansion Rate" value="0" name="ExpansionRateField" style="left: 0; top: 0;" />
-                <ui:Toggle label="Show STANKLines" name="ShowStankLinesToggle" />
-                <uie:PropertyField name="StankLinesEmittersField" label="STANKLines Emitters" />
-                <ui:Button text="DELETE" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DeleteSmellerButton" style="background-color: rgb(255, 0, 0); -unity-font-style: bold; font-size: 24px; width: 146px; align-items: flex-end; align-self: flex-end;" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

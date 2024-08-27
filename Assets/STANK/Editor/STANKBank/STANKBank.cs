@@ -93,9 +93,6 @@ namespace STANK {
             BuildToolBar();
             BuildSTANKSTab();
             BuildSTANKResponsesTab();
-            //BuildFellersTab();
-            //BuildSmellersTab();
-
             spriteProperty = null;
         }
 
@@ -108,8 +105,6 @@ namespace STANK {
 
             stanksButton.clicked += ShowSTANKSTab;
             stankResponsesButton.clicked += ShowSTANKResponsesTab;
-            smellersButton.clicked += ShowSmellersTab;
-
         }
 
         void BuildBANKWindow(){
@@ -118,18 +113,16 @@ namespace STANK {
             rootAsset = stankBankDocument.CloneTree();
             if(rootAsset == null) Debug.Log("rootAsset not found");
             rootVisualElement.Add(rootAsset);            
-            stankBankTab_STANKS = rootAsset.Q<VisualElement>("STANKsDetails");  
+            stankBankTab_STANKS = rootAsset.Q<VisualElement>("STANKsTab");  
             if(stankBankTab_STANKS == null) Debug.Log("stankBankWindow_STANKS not found");          
             stankBankTab_STANKResponses = rootAsset.Q<VisualElement>("STANKResponsesTab");
-            stankBankTab_Smellers = rootAsset.Q<VisualElement>("SmellersTab");
-            stankBankTab_Fellers = rootAsset.Q<VisualElement>("FellersTab");
         }
 
         void BuildSTANKSTab(){
             if(stankBankTab_STANKS == null) Debug.Log("stankBankWindow_STANKS not found");
             stankListView = rootAsset.Q<ListView>("STANKSListView");
             stankListView.selectionChanged += OnSTANKSelectionChange;
-            stankBankTab_STANKS = rootAsset.Q<VisualElement>("STANKsDetails");            
+            stankBankTab_STANKS = rootAsset.Q<VisualElement>("STANKsTab");            
             if(stankBankTab_STANKS == null) Debug.Log("stankBankWindow_STANKS not found");            
             iconField = stankBankTab_STANKS.Q<ObjectField>("IconField");
             if(iconField == null) Debug.Log("IconField not found");
@@ -170,58 +163,30 @@ namespace STANK {
 
         void ShowSTANKSTab(){
             RefreshSTANKListView();
-            stankBankTab_STANKS.AddToClassList(currentlySelectedTabClassName);
-            stankBankTab_STANKS.RemoveFromClassList(unselectedContentClassName);
-            stankBankTab_STANKResponses.RemoveFromClassList(currentlySelectedTabClassName);
-            stankBankTab_STANKResponses.AddToClassList(unselectedContentClassName);            
-            stankBankTab_Smellers.RemoveFromClassList(currentlySelectedTabClassName);
-            stankBankTab_Smellers.AddToClassList(unselectedContentClassName);
-            //stankBankTab_Fellers.RemoveFromClassList(currentlySelectedTabClassName);
-            //stankBankTab_Fellers.AddToClassList(unselectedContentClassName);
+            Debug.Log("stankBankTab_STANKS: " + stankBankTab_STANKS.name);
+            Debug.Log("stankBankTab_STANKResponses: " + stankBankTab_STANKResponses.name);
+            stankBankTab_STANKS.ToggleInClassList(unselectedContentClassName);
+            stankBankTab_STANKS.ToggleInClassList(currentlySelectedTabClassName);
+            stankBankTab_STANKResponses.ToggleInClassList(unselectedContentClassName);
+            stankBankTab_STANKResponses.ToggleInClassList(currentlySelectedTabClassName);
         }
 
         void ShowSTANKResponsesTab(){
             RefreshSTANKResponseListView();
-            stankBankTab_STANKResponses.AddToClassList(currentlySelectedTabClassName);
-            stankBankTab_STANKResponses.RemoveFromClassList(unselectedContentClassName);
-            stankBankTab_STANKS.RemoveFromClassList(currentlySelectedTabClassName);
-            stankBankTab_STANKS.AddToClassList(unselectedContentClassName);
-            stankBankTab_Smellers.RemoveFromClassList(currentlySelectedTabClassName);
-            stankBankTab_Smellers.AddToClassList(unselectedContentClassName);
-            //stankBankTab_Fellers.RemoveFromClassList(currentlySelectedTabClassName);
-            //stankBankTab_Fellers.AddToClassList(unselectedContentClassName);
-        }
-
-        void ShowSmellersTab(){
-            RefreshSmellerListView();
-            stankBankTab_Smellers.RemoveFromClassList(unselectedContentClassName);
-            stankBankTab_Smellers.AddToClassList(currentlySelectedTabClassName);
-            stankBankTab_STANKResponses.AddToClassList(unselectedContentClassName);
-            stankBankTab_STANKResponses.RemoveFromClassList(currentlySelectedTabClassName);
-            stankBankTab_STANKS.RemoveFromClassList(currentlySelectedTabClassName);
-            stankBankTab_STANKS.AddToClassList(unselectedContentClassName);            
-            //stankBankTab_Fellers.RemoveFromClassList(currentlySelectedTabClassName);
-            //stankBankTab_Fellers.AddToClassList(unselectedContentClassName);
-        }
-
-        void ShowFellersTab(){
-            RefreshFellerListView();
-            stankBankTab_Smellers.RemoveFromClassList(unselectedContentClassName);
-            stankBankTab_Smellers.AddToClassList(currentlySelectedTabClassName);
-            stankBankTab_STANKResponses.AddToClassList(unselectedContentClassName);
-            stankBankTab_STANKResponses.RemoveFromClassList(currentlySelectedTabClassName);
-            stankBankTab_STANKS.RemoveFromClassList(currentlySelectedTabClassName);
-            stankBankTab_STANKS.AddToClassList(unselectedContentClassName);            
-            //stankBankTab_Fellers.RemoveFromClassList(currentlySelectedTabClassName);
-            //stankBankTab_Fellers.AddToClassList(unselectedContentClassName);
+            Debug.Log("stankBankTab_STANKS: " + stankBankTab_STANKS.name);
+            Debug.Log("stankBankTab_STANKResponses: " + stankBankTab_STANKResponses.name);
+            stankBankTab_STANKResponses.ToggleInClassList(unselectedContentClassName);
+            stankBankTab_STANKResponses.ToggleInClassList(currentlySelectedTabClassName);
+            stankBankTab_STANKS.ToggleInClassList(unselectedContentClassName);
+            stankBankTab_STANKS.ToggleInClassList(currentlySelectedTabClassName);
         }
 
         public void CreateGUI()
         {
             if(rootAsset == null) Debug.Log("rootAsset not found");
             stankListView = rootAsset.Q<ListView>("STANKSListView");
-            
-            ShowSTANKSTab();
+            RefreshSTANKListView();
+            //ShowSTANKSTab();
             UpdateHUDImagePreview();
         }       
 
@@ -294,7 +259,7 @@ namespace STANK {
             wnd.Focus();
             Rect windowRect = new Rect(500f, 500f, 300f, 450f);
             wnd.position = windowRect;
-            wnd.minSize = new Vector2(250f, 250f);            
+            wnd.minSize = new Vector2(750f, 250f);            
         }
 
         private void CreateSTANKListView()

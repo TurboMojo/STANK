@@ -35,8 +35,6 @@ namespace STANK {
 
         [ExecuteInEditMode]
         void OnEnable(){
-            Icon = new Texture2D(128, 128, TextureFormat.ARGB32, false);
-            HUDMaterial = new Material(Shader.Find("Sprites/Default"));
         }
     }
 
