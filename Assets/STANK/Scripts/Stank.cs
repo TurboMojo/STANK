@@ -26,7 +26,6 @@ namespace STANK {
         public string Description = "";
         // Icon to display in HUD
         public Texture2D Icon = null;
-        public Sprite IconSprite = null;
         public Material HUDMaterial = null;
 
         [HideInInspector] public Image HUDIcon = null;

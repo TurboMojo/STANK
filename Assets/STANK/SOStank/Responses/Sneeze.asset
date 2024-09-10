@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 891b1f39f5121a04b841126ff22ffc0e, type: 3}
   m_Name: Sneeze
   m_EditorClassIdentifier: 
-  Stank: {fileID: 11400000, guid: f8cbbca3294497f469b05f95eec30cf8, type: 2}
+  Name: New STANKResponse
+  Stank: {fileID: 11400000, guid: aa1ca5c1cbf8f4f40aa5b3eda92945d0, type: 2}
   PungencyThreshold: 0.5
   ResponseDelay: 10
   DelayTimer: 0

@@ -13,63 +13,52 @@ namespace STANK {
         public List<Feller> fellers;
         public List<Smeller> smellers;    
         public List<Stank> stanks;
-        STANKEar[] stankEars;
         [SerializeField] AudioMixer mixer;
         [SerializeField] AudioMixerGroup mixerGroup;
-
         [SerializeField] Transform hudParent;    
 
         // Start is called before the first frame update
         void Start()
         {
+            // Variable initialization
             Instance = this;
             smellers = FindObjectsOfType<Smeller>().ToList();        
             fellers = FindObjectsOfType<Feller>().ToList();
-            stankEars = FindObjectsOfType<STANKEar>();
-
-            foreach(STANKEar ear in stankEars){
-                if(mixer != null){
-                    ear.SetAudioMixer(mixer);
-                }                
-            }
             
+            // Make sure all HUDIcons exist when appropriate
             foreach(Smeller smeller in smellers)
             {
                 if(smeller.stank.Icon != null && smeller.stank.HUDIcon != null) smeller.stank.HUDIcon = CreateHUDIcon(smeller.stank);
                 if(!stanks.Contains(smeller.stank)) stanks.Add(smeller.stank);
             }
-            if (fellers.Count > 0)
+            
+            // Add all Fellers to an accessible list and call Initialize() to set up the Fellers.
+            foreach (Feller feller in fellers.ToList())
             {
-                foreach (Feller feller in fellers.ToList())
-                {
-                    AddFeller(feller);
-                    feller.Initialize();
-                }
-            }
+                fellers.Add(feller);
+                feller.Initialize();
+            }            
         }
 
         Image CreateHUDIcon(Stank odor)
         {
-            Debug.Log("CreateHUDIcon");
+            // Create a HUD Icon for each odor and set its position and size
             GameObject imgObject = new GameObject(odor.name+"_HUDIcon");
-            imgObject.transform.SetParent(hudParent);
             RectTransform trans = imgObject.AddComponent<RectTransform>();
             trans.localScale = Vector3.one;
             trans.anchoredPosition = Vector2.zero; // setting position, will be on center
             trans.sizeDelta = new Vector2(odor.Icon.width, odor.Icon.height); // custom size
 
+            // Create an image component and set its material and sprite
             Image image = imgObject.AddComponent<Image>();
             image.material = odor.HUDMaterial;
             Texture2D tex = odor.Icon;
             image.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
+
+            // Parent the image to the HUD parent and make it invisible
             imgObject.transform.SetParent(hudParent);
             imgObject.SetActive(false);
             return image;
-        }
-
-        public void AddFeller(Feller f)
-        {
-            fellers.Add(f);
         }
     }
 }

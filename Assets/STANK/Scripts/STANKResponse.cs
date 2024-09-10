@@ -16,13 +16,16 @@ namespace STANK {
         // Can trigger an AnimationClip, which is built into the AnimatorController by STANKYLeg
         // The responseVFX ParticleSystem is intended for things like tears, vomit, etc.
         // STANKResponseAudio
+        
         //[Header("Required Fields")]
+        public string Name = "New STANKResponse";
         public Stank Stank;
         // STANKTolerance object that defines the threshold for this response.
         public float PungencyThreshold = 0.5f ;
         [Tooltip("Minimum amount of time required between responses, prevents infinite puke loops")]
         [Min(0.1f)]
         public float ResponseDelay = 10.0f;      
+        [HideInInspector]
         public float DelayTimer = 0.0f;
         
         //[Header("Optional Fields")]
