@@ -5,7 +5,6 @@ using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 
-
 namespace STANK {
     public class STANKYLeg : STANKResponseListener, ISTANKResponse
     {

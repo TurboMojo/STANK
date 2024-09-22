@@ -1,5 +1,5 @@
 .section {
-    background-color: var(--unity-colors-default-background);
+    background-color: rgba(40, 40, 40, 0);
 }
 
 .hidden {
@@ -14,4 +14,8 @@
 
 .customListView {
     background-color: rgb(29, 29, 29);
+}
+
+.fillwindow {
+    flex-grow: 1;
 }

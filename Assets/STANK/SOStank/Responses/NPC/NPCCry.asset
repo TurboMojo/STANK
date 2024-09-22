@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 891b1f39f5121a04b841126ff22ffc0e, type: 3}
   m_Name: NPCCry
   m_EditorClassIdentifier: 
+  Name: NPCCry
   Stank: {fileID: 11400000, guid: 560b793315b7339428628b13ce3b6970, type: 2}
   PungencyThreshold: 0.5
   ResponseDelay: 10

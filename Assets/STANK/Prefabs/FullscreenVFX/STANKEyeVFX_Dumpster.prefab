@@ -4813,13 +4813,15 @@ ParticleSystemRenderer:
   m_RenderAlignment: 0
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
-  m_UseCustomVertexStreams: 0
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
+  m_UseCustomVertexStreams: 0
   m_VertexStreams: 00010304
+  m_UseCustomTrailVertexStreams: 0
+  m_TrailVertexStreams: 00010304
   m_Mesh: {fileID: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
@@ -4838,9 +4840,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 36166643512633788}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2538320cc3d76041aeb79342f38c8d8, type: 3}
+  m_Script: {fileID: 11500000, guid: c7b16e547dac73644854b9f2126b566f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   stank: {fileID: 0}
-  maxParticlesPerSecond: 0
-  startSize: 0

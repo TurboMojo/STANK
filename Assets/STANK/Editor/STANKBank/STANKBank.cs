@@ -140,7 +140,7 @@ namespace STANK {
             iconField = stankBankTab_STANKS.Q<ObjectField>("IconField");
             if(iconField == null) Debug.Log("IconField not found");
             iconField.RegisterValueChangedCallback(x => UpdateHUDImagePreview());
-            stankHudSpriteField = stankBankTab_STANKS.Q<ObjectField>("IconField");
+            stankHudSpriteField = stankBankTab_STANKS.Q<ObjectField>("IconPreview");
             stankNameField = stankBankTab_STANKS.Q<TextField>("NameField");
             stankDescriptionField = stankBankTab_STANKS.Q<TextField>("DescriptionField");
             gizmoColorField = stankBankTab_STANKS.Q<ColorField>("GizmoColorField");

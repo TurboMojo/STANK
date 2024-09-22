@@ -27,9 +27,7 @@ namespace STANK {
         public List<STANKResponse> responses;
         [Tooltip("How well this feller smells")]
         public float acuity = 1.0f;
-        /* [Tooltip("Delay in seconds between reactions.  This MUST be > 0, or no reactions will ever successfully occur.")]
-        public float reactionDelay = 10.0f;
-        float delayTimer = 0.0f; */
+        float delayTimer = 0.0f; 
         [Header("Optional Fields")]
         // STANKEye and STANKYLeg are optional, but if they are not present, the Feller will not react to smells unless supported by custom components.  Must be attached to the Feller gameobject.
         STANKEye stankeye;
