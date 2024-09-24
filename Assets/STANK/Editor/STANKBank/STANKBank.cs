@@ -12,10 +12,11 @@ namespace STANK {
     public class STANKBank : EditorWindow
     {
         public static STANKBank Vault;
-
+        enum SelectedTab { STANKS, STANKResponses } 
         
         private const string currentlySelectedTabClassName = "selected";
         private const string hiddenClassName = "hidden";
+        private const string selectedToolbarButtonClassName = "selectedToolbarButton";
 
         // Elements of the UIDocument
         VisualElement rootAsset;
@@ -27,6 +28,7 @@ namespace STANK {
         List<Feller> allFellers = new List<Feller>();
         string stankSavePath = "Assets/STANK/SOStank/Stanks/";
         string responseSavePath = "Assets/STANK/SOStank/Responses/";
+        SelectedTab selectedTab = SelectedTab.STANKS;
 
         // Toolbar
         ToolbarButton stanksButton;
@@ -65,6 +67,7 @@ namespace STANK {
         SerializedProperty stankResponseNameProperty;
         TextField stankResponseNameField;
         TextField stankResponseDescriptionField;    
+        SerializedProperty stankResponseDescriptionProperty;
         ColorField gizmoColorField;
         ObjectField hudMaterialField;
         STANKResponse newStankResponse;
@@ -198,6 +201,7 @@ namespace STANK {
             
             serializedSelectedSTANKResponse = new SerializedObject(selectedSTANKResponse as UnityEngine.Object);
             stankResponseNameProperty = serializedSelectedSTANKResponse.FindProperty("Name");
+            stankResponseDescriptionProperty = serializedSelectedSTANKResponse.FindProperty("Description");
             pungencyThresholdProperty = serializedSelectedSTANKResponse.FindProperty("PungencyThreshold");
             responseDelayProperty = serializedSelectedSTANKResponse.FindProperty("ResponseDelay");
             AnimationClipProperty = serializedSelectedSTANKResponse.FindProperty("AnimationClip");
@@ -251,15 +255,27 @@ namespace STANK {
         }
 
         void ShowSTANKSTab(){
+            if(selectedTab == SelectedTab.STANKS) return;
             RefreshSTANKListView();
+            stanksButton.ToggleInClassList(selectedToolbarButtonClassName);
+            stankResponsesButton.ToggleInClassList(selectedToolbarButtonClassName);
+            stankBankTab_STANKS.visible = true;
+            stankBankTab_STANKResponses.visible = false;
             stankBankTab_STANKS.ToggleInClassList(hiddenClassName);            
             stankBankTab_STANKResponses.ToggleInClassList(hiddenClassName);            
+            selectedTab = SelectedTab.STANKS;
         }
 
         void ShowSTANKResponsesTab(){
+            if(selectedTab == SelectedTab.STANKResponses) return;
             RefreshSTANKResponseListView();
+            stanksButton.ToggleInClassList(selectedToolbarButtonClassName);
+            stankResponsesButton.ToggleInClassList(selectedToolbarButtonClassName);
+            stankBankTab_STANKS.visible = false;
+            stankBankTab_STANKResponses.visible = true;
             stankBankTab_STANKResponses.ToggleInClassList(hiddenClassName);            
             stankBankTab_STANKS.ToggleInClassList(hiddenClassName);            
+            selectedTab = SelectedTab.STANKResponses;
         }
 
         public void CreateGUI()
@@ -373,8 +389,8 @@ namespace STANK {
 
         public void RefreshSTANKResponseListView()
         {
-            // if (stankResponseListView == null) Debug.Log("stankResponseListView not found");
-
+            if (stankResponseListView == null) Debug.Log("stankResponseListView not found");
+            
             var allSTANKResponseGuids = AssetDatabase.FindAssets("t:STANKResponse");
             allSTANKResponses.Clear();
             foreach (var guid in allSTANKResponseGuids)
@@ -390,6 +406,7 @@ namespace STANK {
             }
             //Debug.Log("selectedSTANKResponse: "+selectedSTANKResponse.Name);
             // Clear the list view and rebuild it
+            
             CreateSTANKResponseListView();
             stankResponseListView.Rebuild();
             stankResponseListView.AddToSelection(0);

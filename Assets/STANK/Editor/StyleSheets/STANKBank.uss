@@ -19,3 +19,7 @@
 .fillwindow {
     flex-grow: 1;
 }
+
+.selectedToolbarButton {
+    background-color: rgb(88, 88, 88);
+}

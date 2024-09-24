@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
     <Style src="project://database/Assets/STANK/Editor/StyleSheets/STANKBank.uss?fileID=7433441132597879392&amp;guid=019b9b62305eb1043b4bda9a872b6ba7&amp;type=3#STANKBank" />
     <uie:Toolbar class="section" style="flex-grow: 0; align-items: auto;">
-        <uie:ToolbarButton text="STANKs" parse-escape-sequences="true" display-tooltip-when-elided="true" name="STANKsToolbarButton" />
+        <uie:ToolbarButton text="STANKs" parse-escape-sequences="true" display-tooltip-when-elided="true" name="STANKsToolbarButton" class="selectedToolbarButton" />
         <uie:ToolbarButton text="STANKResponses" parse-escape-sequences="true" display-tooltip-when-elided="true" name="STANKResponsesToolbarButton" />
         <uie:ToolbarButton text="Smellers" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SmellersToolbarButton" class="hidden" />
     </uie:Toolbar>
@@ -26,15 +26,16 @@
         <ui:VisualElement name="STANKResponsesTab" class="section hidden" style="flex-grow: 1; flex-direction: row; min-height: 100%; flex-basis: auto; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; align-self: flex-start;">
             <ui:VisualElement name="STANKResponseListViewVE" style="flex-grow: 1; max-width: 50%; min-width: 30%; max-height: none; min-height: auto; align-items: auto;">
                 <ui:Button text="Create STANKResponse" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CreateSTANKResponseButton" style="align-self: stretch; -unity-font-style: bold; font-size: 18px; max-width: 100%; min-width: 100%; bottom: auto; position: relative; max-height: none; min-height: 10%; margin-right: 0; margin-left: 0; justify-content: center;" />
-                <ui:ListView focusable="true" name="STANKResponseListView" header-title="STANKs" class="section customListView" style="width: auto; max-width: none; min-width: 100%; max-height: 90%; min-height: 90%; position: relative; left: auto; top: auto; visibility: hidden;" />
+                <ui:ListView focusable="true" name="STANKResponseListView" header-title="STANKs" class="section customListView" style="width: auto; max-width: none; min-width: 100%; max-height: 90%; min-height: 90%; position: relative; left: auto; top: auto; visibility: visible;" />
             </ui:VisualElement>
             <ui:VisualElement name="STANKResponsesDetails" style="flex-grow: 1; max-width: none; max-height: none; min-width: auto; min-height: auto; position: relative; left: auto; top: auto; right: auto; visibility: visible; align-items: flex-start; flex-basis: auto;">
                 <ui:Label tabindex="-1" text="STANKResponses" parse-escape-sequences="true" display-tooltip-when-elided="true" name="STANKResponsesLabel" style="font-size: 43px;" />
-                <ui:TextField picking-mode="Ignore" label="STANKResponse Name" value="Enter name..." name="ResponseNameField" style="align-self: auto; align-items: stretch;" />
-                <uie:ObjectField label="STANK" name="STANKField" allow-scene-objects="false" type="STANK.Stank, Assembly-CSharp" style="align-items: stretch; flex-basis: auto;" />
-                <ui:FloatField label="Pungency Threshold" value="0" name="PungencyThresholdField" />
-                <ui:FloatField label="Response Delay" value="0" name="ResponseDelayField" style="left: 0; top: 0;" />
-                <uie:ObjectField label="Animation Clip" name="AnimationClipField" type="UnityEngine.AnimationClip, UnityEngine.AnimationModule" style="align-items: stretch;" />
+                <ui:TextField picking-mode="Ignore" label="Name" value="Enter name..." name="ResponseNameField" style="align-self: auto; align-items: stretch; max-width: 95%; min-width: 95%;" />
+                <ui:TextField picking-mode="Ignore" label="Description" value="Enter name..." name="ResponseDescriptionField" multiline="true" style="align-self: auto; align-items: stretch; max-width: 95%; min-width: 95%; min-height: 50px;" />
+                <uie:ObjectField label="STANK" name="STANKField" allow-scene-objects="false" type="STANK.Stank, Assembly-CSharp" style="align-items: stretch; flex-basis: auto; max-width: 95%; min-width: 95%;" />
+                <ui:FloatField label="Pungency Threshold" value="0" name="PungencyThresholdField" style="max-width: 95%; min-width: 95%;" />
+                <ui:FloatField label="Response Delay" value="0" name="ResponseDelayField" style="left: 0; top: 0; max-width: 95%; min-width: 95%;" />
+                <uie:ObjectField label="Animation Clip" name="AnimationClipField" type="UnityEngine.AnimationClip, UnityEngine.AnimationModule" style="align-items: stretch; max-width: 95%; min-width: 95%;" />
                 <ui:Button text="DELETE" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DeleteSTANKResponseButton" style="background-color: rgb(255, 0, 0); -unity-font-style: bold; font-size: 24px; width: 146px; align-items: flex-end; align-self: flex-end;" />
                 <ui:Button text="SAVE" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SaveSTANKResponseButton" class="hidden" style="background-color: rgb(0, 142, 14); -unity-font-style: bold; font-size: 24px; width: 146px; align-items: flex-end; align-self: flex-end;" />
             </ui:VisualElement>
