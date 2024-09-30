@@ -24,7 +24,6 @@ namespace STANK {
         }
 
         void Sniff(InputAction.CallbackContext context){
-            Debug.Log("Sniff");
             // Takes a whiff at the player's request
             feller.TakeAWhiff();
         }

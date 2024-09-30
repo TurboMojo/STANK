@@ -18,20 +18,24 @@ namespace STANK {
         private Vector2 m_Look;
         private Vector2 m_Move;
 
-        public void OnMove(InputValue value)
+        public void OnMove(InputAction.CallbackContext context)
         {
-            m_Move = value.Get<Vector2>();
+            
+            m_Move = context.ReadValue<Vector2>();
+            
         }
 
-        public void OnLook(InputValue value)
+        public void OnLook(InputAction.CallbackContext context)
         {
-            m_Look = value.Get<Vector2>();
+            m_Look = context.ReadValue<Vector2>();
+
         }
 
         public void Update()
         {
             // Update orientation first, then move. Otherwise move orientation will lag
             // behind by one frame.
+            
             Look(m_Look);
             Move(m_Move);
         }
